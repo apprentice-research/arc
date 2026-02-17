@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do I Need a Master's? — ARC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+
+:root {
+    --amber: #E8913A;
+    --amber-light: #F4C27F;
+    --amber-glow: #FFF3E0;
+    --teal: #1A6B5A;
+    --teal-deep: #0E4D3F;
+    --teal-light: #E8F5F1;
+    --cream: #FFFBF5;
+    --cream-mid: #FFF7ED;
+    --charcoal: #2D2A26;
+    --warm-gray: #6B6560;
+    --warm-gray-light: #A39E98;
+    --coral: #E85D4A;
+    --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    color: var(--charcoal);
+    background: var(--cream);
+    line-height: 1.7;
+    font-weight: 400;
+    overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255, 251, 245, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 20px rgba(45, 42, 38, 0.06);
+    transition: all 0.3s;
+}
+
+.nav-logo {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none; color: var(--charcoal);
+}
+
+.nav-logo-img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+}
+
+.nav-links {
+    display: flex; gap: 1.8rem; list-style: none; align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none; color: var(--warm-gray);
+    font-size: 0.88rem; font-weight: 500; transition: color 0.3s;
+    letter-spacing: 0.02em;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--teal); }
+
+.nav-cta {
+    background: var(--teal) !important; color: white !important;
+    padding: 0.5rem 1.3rem; border-radius: 100px;
+    font-weight: 600 !important; transition: all 0.3s;
+}
+
+.nav-cta:hover {
+    background: var(--teal-deep) !important;
+    transform: translateY(-1px);
+}
+
+.mobile-toggle {
+    display: none; background: none; border: none; cursor: pointer; padding: 0.5rem;
+}
+.mobile-toggle span {
+    display: block; width: 22px; height: 2px; background: var(--charcoal);
+    margin: 5px 0; transition: all 0.3s; border-radius: 2px;
+}
+
+/* ===== GUIDE PAGE ===== */
+.guide-header {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.guide-header::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header::after {
+    content: '';
+    position: absolute; bottom: -30%; left: -15%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26, 107, 90, 0.05) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header-inner {
+    max-width: 720px; margin: 0 auto; position: relative; z-index: 1;
+}
+
+.guide-breadcrumb {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.82rem; color: var(--warm-gray-light);
+    margin-bottom: 1.5rem; text-decoration: none;
+    transition: color 0.3s;
+}
+
+.guide-breadcrumb:hover { color: var(--teal); }
+
+.guide-breadcrumb svg { width: 14px; height: 14px; }
+
+.guide-number {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--teal-light); color: var(--teal);
+    padding: 0.35rem 1rem; border-radius: 100px;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+}
+
+.guide-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.15; color: var(--charcoal);
+    margin-bottom: 0.8rem; font-weight: 400;
+}
+
+.guide-subtitle {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto; line-height: 1.7;
+}
+
+/* ===== GUIDE CONTENT ===== */
+.guide-body {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 2rem 5rem;
+}
+
+.guide-body h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; color: var(--charcoal);
+    margin: 3rem 0 1rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+    margin: 2rem 0 0.8rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body p {
+    color: var(--warm-gray);
+    font-size: 1.02rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.85;
+}
+
+.guide-body p:first-child {
+    font-size: 1.1rem;
+    color: var(--charcoal);
+}
+
+.guide-body strong {
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+.guide-body em {
+    font-style: italic;
+}
+
+.guide-body blockquote,
+.guide-body .callout {
+    margin: 2rem 0;
+    padding: 1.5rem 1.5rem 1.5rem 2rem;
+    border-left: 3px solid var(--amber);
+    background: var(--amber-glow);
+    border-radius: 0 12px 12px 0;
+    font-size: 0.98rem;
+    color: var(--charcoal);
+    line-height: 1.7;
+}
+
+.guide-body a {
+    color: var(--teal);
+    text-decoration: underline;
+    text-decoration-color: rgba(26, 107, 90, 0.3);
+    text-underline-offset: 3px;
+    transition: all 0.2s;
+}
+
+.guide-body a:hover {
+    text-decoration-color: var(--teal);
+}
+
+/* ===== GUIDE NAV (prev/next) ===== */
+.guide-nav {
+    max-width: 700px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+    display: flex; justify-content: space-between; gap: 1rem;
+    border-top: 1px solid rgba(45, 42, 38, 0.08);
+    padding-top: 2rem;
+}
+
+.guide-nav a {
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.08);
+    transition: all 0.3s;
+    max-width: 48%;
+    display: flex; flex-direction: column; gap: 0.3rem;
+}
+
+.guide-nav a:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(45, 42, 38, 0.06);
+}
+
+.guide-nav-label {
+    font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--warm-gray-light);
+    font-weight: 600;
+}
+
+.guide-nav-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem; color: var(--charcoal); line-height: 1.3;
+}
+
+.guide-nav a.next { text-align: right; margin-left: auto; }
+
+/* ===== GUIDES INDEX ===== */
+.guides-hero {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+}
+
+.guides-hero::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guides-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: var(--charcoal); margin-bottom: 1rem;
+    font-weight: 400; position: relative; z-index: 1;
+}
+
+.guides-hero p {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto;
+    line-height: 1.7; position: relative; z-index: 1;
+}
+
+.guides-section {
+    max-width: 900px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+}
+
+.guides-category {
+    margin-bottom: 3rem;
+}
+
+.guides-category-label {
+    font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--amber); margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(45, 42, 38, 0.06);
+}
+
+.guide-card {
+    display: block; text-decoration: none;
+    padding: 1.3rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.06);
+    margin-bottom: 0.75rem;
+    transition: all 0.3s;
+}
+
+.guide-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(45, 42, 38, 0.06);
+}
+
+.guide-card-num {
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--teal); margin-bottom: 0.25rem;
+}
+
+.guide-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--charcoal);
+    margin-bottom: 0.3rem; line-height: 1.3;
+}
+
+.guide-card-desc {
+    font-size: 0.88rem; color: var(--warm-gray); line-height: 1.5;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background: var(--teal-deep);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.site-footer a {
+    color: var(--amber-light);
+    text-decoration: none;
+}
+
+.site-footer a:hover { text-decoration: underline; }
+
+.footer-inner {
+    max-width: 600px; margin: 0 auto;
+}
+
+.footer-logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+    color: var(--amber-light);
+    font-size: 0.9rem; margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.footer-links {
+    display: flex; gap: 1.5rem; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-toggle { display: block; }
+    nav.open .nav-links {
+        display: flex; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(255, 251, 245, 0.98);
+        backdrop-filter: blur(12px);
+        padding: 1rem 2rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(45, 42, 38, 0.08);
+    }
+    .guide-nav { flex-direction: column; }
+    .guide-nav a { max-width: 100%; }
+    .guide-nav a.next { text-align: left; }
+}
+
+@media (max-width: 480px) {
+    .guide-header { padding: 7rem 1.2rem 2rem; }
+    .guide-body { padding: 1.5rem 1.2rem 4rem; }
+    .guide-body h2 { font-size: 1.4rem; }
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="nav-logo">
+            <img src="../logo.png" alt="ARC logo" class="nav-logo-img">
+            <span class="nav-logo-text">ARC</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../index.html" >Home</a></li>
+            <li><a href="../guides.html" class='active'>Guides</a></li>
+            <li><a href="../index.html#join" class="nav-cta">Get Involved</a></li>
+        </ul>
+        <button class="mobile-toggle" onclick="this.closest('nav').classList.toggle('open')" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="guide-header">
+        <div class="guide-header-inner">
+            <a href="../guides.html" class="guide-breadcrumb">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                All Guides
+            </a>
+            <div class="guide-number">Guide 9</div>
+            <h1>Do I Need a Master's?</h1>
+            <p class="guide-subtitle">The honest answer is "it depends." Here's how to figure out what's right for you.</p>
+        </div>
+    </div>
+
+    <div class="guide-body">
+        <h2>The Quick Answer</h2>
+<p>In the UK, many science PhD programmes accept applicants with a strong bachelor's degree (typically a 2:1 or first). A master's is not always required. But there are good reasons to do one, and good reasons to skip it. The right choice depends on your specific circumstances.
+</p>
+<h2>When a Master's Makes Sense</h2>
+<p><strong>You want to change fields.</strong> If your apprenticeship and degree are in pharmaceutical manufacturing but you want to do a PhD in molecular biology, a master's in the target field gives you the specific knowledge and skills that will make your PhD application competitive. It bridges the gap.
+</p>
+<p><strong>You want to build research skills before committing.</strong> A master's with a substantial research project (an MRes or MSc with a dissertation component) gives you a taste of what independent research feels like — on a shorter timescale and with less pressure than a PhD. If you're not sure whether research is for you, a master's is a lower-stakes way to find out.
+</p>
+<p><strong>Your undergraduate degree classification wasn't strong enough.</strong> Some PhD programmes ask for a first or 2:1. If your degree classification doesn't meet this threshold, a strong master's can demonstrate that you've since developed the academic capability needed for doctoral research. A distinction at master's level carries real weight.
+</p>
+<p><strong>You want to strengthen your application.</strong> If you're applying for highly competitive PhD positions, a master's with relevant research experience and strong references can give your application an edge, particularly if your undergraduate route was non-traditional.
+</p>
+<p><strong>The PhD programme includes one.</strong> Some DTPs and CDTs offer integrated "1+3" programmes: a funded master's year followed by three years of PhD research. In these cases, you don't need a separate master's — it's built in and funded as part of the package.
+</p>
+<h2>When You Can Skip It</h2>
+<p><strong>You already have a strong degree and research experience.</strong> If your degree apprenticeship or bachelor's included a substantial research project, and your grades are solid, you may be well-positioned to apply directly for a PhD.
+</p>
+<p><strong>There's a funded PhD in your area.</strong> If you've found a specific PhD project that excites you, with a supervisor who wants to work with you, and the funding is available — don't delay by doing a master's first. The opportunity might not still be there in a year.
+</p>
+<p><strong>You can't afford an unfunded master's.</strong> Here's the uncomfortable truth: most taught master's programmes in the UK are not funded. Tuition fees for an MSc can be £10,000–£15,000 or more, plus living costs. If taking on that debt would put you under serious financial pressure, and you have a viable route to a funded PhD, it may make more sense to apply for PhDs directly. Some master's scholarships exist (check university websites, the Alternative Guide to Postgraduate Funding, and charity funders) but they're competitive.
+</p>
+<p><strong>Your work experience already gives you what a master's would.</strong> If you've spent several years doing science professionally — running experiments, solving problems, contributing to projects — you have practical research experience that many master's graduates don't. This counts. Make sure your application makes this clear.
+</p>
+<h2>The Third Option: MRes vs MSc</h2>
+<p>If you do decide to do a master's, it's worth understanding the difference between an MSc and an MRes.
+</p>
+<p>An <strong>MSc (Master of Science)</strong> is usually one year, with taught modules and a shorter research project (typically three to four months). It gives you broader knowledge in a field and some research experience.
+</p>
+<p>An <strong>MRes (Master of Research)</strong> is also usually one year, but with a much larger research component — often six to nine months of project work with relatively few taught modules. It's specifically designed as preparation for a PhD.
+</p>
+<p>If your primary goal is PhD readiness, an MRes is generally the stronger choice. If you want a broader grounding in a new field, an MSc may be better.
+</p>
+<h2>How to Decide</h2>
+<p>Ask yourself: Does my current application — my qualifications, experience, references, and research exposure — give me a realistic shot at the PhD programmes I'm interested in?
+</p>
+<p>If yes, apply for PhDs. You can always do a master's later if things don't work out.
+</p>
+<p>If no, identify the specific gap. Is it academic credentials? Research experience? Subject knowledge? Then choose the master's that fills that gap most effectively.
+</p>
+<p>And talk to people. Current PhD students, potential supervisors, and university admissions teams can all give you a realistic sense of whether your profile is competitive. This is free, and it's the most reliable way to calibrate your expectations.
+</p>
+    </div>
+
+    <div class="guide-nav">
+        <a href="reading-papers.html" class="prev">
+            <span class="guide-nav-label">← Previous</span>
+            <span class="guide-nav-title">How to Read a Scientific Paper</span>
+        </a>
+        <a href="building-experience.html" class="next">
+            <span class="guide-nav-label">Next →</span>
+            <span class="guide-nav-title">Getting Research Experience Before You Apply</span>
+        </a>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <img src="../logo.png" alt="ARC logo" class="footer-logo-img">
+            <div class="footer-tagline">Not the Backup Plan.</div>
+            <div class="footer-links">
+                <a href="../">Home</a>
+                <a href="../guides.html">All Guides</a>
+                <a href="../#join">Get Involved</a>
+            </div>
+            <p>&copy; 2025 ARC — Apprentices into Research Careers</p>
+        </div>
+    </footer>
+</body>
+</html>

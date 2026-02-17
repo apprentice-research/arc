@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Does a PhD Actually Involve? — ARC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+
+:root {
+    --amber: #E8913A;
+    --amber-light: #F4C27F;
+    --amber-glow: #FFF3E0;
+    --teal: #1A6B5A;
+    --teal-deep: #0E4D3F;
+    --teal-light: #E8F5F1;
+    --cream: #FFFBF5;
+    --cream-mid: #FFF7ED;
+    --charcoal: #2D2A26;
+    --warm-gray: #6B6560;
+    --warm-gray-light: #A39E98;
+    --coral: #E85D4A;
+    --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    color: var(--charcoal);
+    background: var(--cream);
+    line-height: 1.7;
+    font-weight: 400;
+    overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255, 251, 245, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 20px rgba(45, 42, 38, 0.06);
+    transition: all 0.3s;
+}
+
+.nav-logo {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none; color: var(--charcoal);
+}
+
+.nav-logo-img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+}
+
+.nav-links {
+    display: flex; gap: 1.8rem; list-style: none; align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none; color: var(--warm-gray);
+    font-size: 0.88rem; font-weight: 500; transition: color 0.3s;
+    letter-spacing: 0.02em;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--teal); }
+
+.nav-cta {
+    background: var(--teal) !important; color: white !important;
+    padding: 0.5rem 1.3rem; border-radius: 100px;
+    font-weight: 600 !important; transition: all 0.3s;
+}
+
+.nav-cta:hover {
+    background: var(--teal-deep) !important;
+    transform: translateY(-1px);
+}
+
+.mobile-toggle {
+    display: none; background: none; border: none; cursor: pointer; padding: 0.5rem;
+}
+.mobile-toggle span {
+    display: block; width: 22px; height: 2px; background: var(--charcoal);
+    margin: 5px 0; transition: all 0.3s; border-radius: 2px;
+}
+
+/* ===== GUIDE PAGE ===== */
+.guide-header {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.guide-header::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header::after {
+    content: '';
+    position: absolute; bottom: -30%; left: -15%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26, 107, 90, 0.05) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header-inner {
+    max-width: 720px; margin: 0 auto; position: relative; z-index: 1;
+}
+
+.guide-breadcrumb {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.82rem; color: var(--warm-gray-light);
+    margin-bottom: 1.5rem; text-decoration: none;
+    transition: color 0.3s;
+}
+
+.guide-breadcrumb:hover { color: var(--teal); }
+
+.guide-breadcrumb svg { width: 14px; height: 14px; }
+
+.guide-number {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--teal-light); color: var(--teal);
+    padding: 0.35rem 1rem; border-radius: 100px;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+}
+
+.guide-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.15; color: var(--charcoal);
+    margin-bottom: 0.8rem; font-weight: 400;
+}
+
+.guide-subtitle {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto; line-height: 1.7;
+}
+
+/* ===== GUIDE CONTENT ===== */
+.guide-body {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 2rem 5rem;
+}
+
+.guide-body h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; color: var(--charcoal);
+    margin: 3rem 0 1rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+    margin: 2rem 0 0.8rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body p {
+    color: var(--warm-gray);
+    font-size: 1.02rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.85;
+}
+
+.guide-body p:first-child {
+    font-size: 1.1rem;
+    color: var(--charcoal);
+}
+
+.guide-body strong {
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+.guide-body em {
+    font-style: italic;
+}
+
+.guide-body blockquote,
+.guide-body .callout {
+    margin: 2rem 0;
+    padding: 1.5rem 1.5rem 1.5rem 2rem;
+    border-left: 3px solid var(--amber);
+    background: var(--amber-glow);
+    border-radius: 0 12px 12px 0;
+    font-size: 0.98rem;
+    color: var(--charcoal);
+    line-height: 1.7;
+}
+
+.guide-body a {
+    color: var(--teal);
+    text-decoration: underline;
+    text-decoration-color: rgba(26, 107, 90, 0.3);
+    text-underline-offset: 3px;
+    transition: all 0.2s;
+}
+
+.guide-body a:hover {
+    text-decoration-color: var(--teal);
+}
+
+/* ===== GUIDE NAV (prev/next) ===== */
+.guide-nav {
+    max-width: 700px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+    display: flex; justify-content: space-between; gap: 1rem;
+    border-top: 1px solid rgba(45, 42, 38, 0.08);
+    padding-top: 2rem;
+}
+
+.guide-nav a {
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.08);
+    transition: all 0.3s;
+    max-width: 48%;
+    display: flex; flex-direction: column; gap: 0.3rem;
+}
+
+.guide-nav a:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(45, 42, 38, 0.06);
+}
+
+.guide-nav-label {
+    font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--warm-gray-light);
+    font-weight: 600;
+}
+
+.guide-nav-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem; color: var(--charcoal); line-height: 1.3;
+}
+
+.guide-nav a.next { text-align: right; margin-left: auto; }
+
+/* ===== GUIDES INDEX ===== */
+.guides-hero {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+}
+
+.guides-hero::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guides-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: var(--charcoal); margin-bottom: 1rem;
+    font-weight: 400; position: relative; z-index: 1;
+}
+
+.guides-hero p {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto;
+    line-height: 1.7; position: relative; z-index: 1;
+}
+
+.guides-section {
+    max-width: 900px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+}
+
+.guides-category {
+    margin-bottom: 3rem;
+}
+
+.guides-category-label {
+    font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--amber); margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(45, 42, 38, 0.06);
+}
+
+.guide-card {
+    display: block; text-decoration: none;
+    padding: 1.3rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.06);
+    margin-bottom: 0.75rem;
+    transition: all 0.3s;
+}
+
+.guide-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(45, 42, 38, 0.06);
+}
+
+.guide-card-num {
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--teal); margin-bottom: 0.25rem;
+}
+
+.guide-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--charcoal);
+    margin-bottom: 0.3rem; line-height: 1.3;
+}
+
+.guide-card-desc {
+    font-size: 0.88rem; color: var(--warm-gray); line-height: 1.5;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background: var(--teal-deep);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.site-footer a {
+    color: var(--amber-light);
+    text-decoration: none;
+}
+
+.site-footer a:hover { text-decoration: underline; }
+
+.footer-inner {
+    max-width: 600px; margin: 0 auto;
+}
+
+.footer-logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+    color: var(--amber-light);
+    font-size: 0.9rem; margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.footer-links {
+    display: flex; gap: 1.5rem; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-toggle { display: block; }
+    nav.open .nav-links {
+        display: flex; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(255, 251, 245, 0.98);
+        backdrop-filter: blur(12px);
+        padding: 1rem 2rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(45, 42, 38, 0.08);
+    }
+    .guide-nav { flex-direction: column; }
+    .guide-nav a { max-width: 100%; }
+    .guide-nav a.next { text-align: left; }
+}
+
+@media (max-width: 480px) {
+    .guide-header { padding: 7rem 1.2rem 2rem; }
+    .guide-body { padding: 1.5rem 1.2rem 4rem; }
+    .guide-body h2 { font-size: 1.4rem; }
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="nav-logo">
+            <img src="../logo.png" alt="ARC logo" class="nav-logo-img">
+            <span class="nav-logo-text">ARC</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../index.html" >Home</a></li>
+            <li><a href="../guides.html" class='active'>Guides</a></li>
+            <li><a href="../index.html#join" class="nav-cta">Get Involved</a></li>
+        </ul>
+        <button class="mobile-toggle" onclick="this.closest('nav').classList.toggle('open')" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="guide-header">
+        <div class="guide-header-inner">
+            <a href="../guides.html" class="guide-breadcrumb">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                All Guides
+            </a>
+            <div class="guide-number">Guide 5</div>
+            <h1>What Does a PhD Actually Involve?</h1>
+            <p class="guide-subtitle">The honest, practical guide to what your days, weeks, and years will look like.</p>
+        </div>
+    </div>
+
+    <div class="guide-body">
+        <h2>Why This Guide Exists</h2>
+<p>If nobody in your family or friendship group has done a PhD, the whole thing can feel like a black box. You know it takes three to four years. You know it involves research. But what do you actually do every day? What does a typical week look like? How much freedom do you have? How much support? And is it really as lonely and miserable as the internet sometimes makes it sound?
+</p>
+<p>This guide gives you the honest version.
+</p>
+<h2>The Basic Structure</h2>
+<p>A PhD in the UK typically lasts three to four years full-time (or five to seven years part-time). In science, it's almost always lab-based or computationally based, meaning you're generating original data and analysing it.
+</p>
+<p>The shape of those years usually looks something like this:
+</p>
+<p><strong>Year one</strong> is about getting set up. You'll spend time reading the existing literature in your field (a process that feels endless but does eventually plateau), learning new techniques, getting trained on equipment, and starting to generate preliminary data. Most PhD programmes also include some taught courses or training modules in your first year, covering things like research methods, statistics, scientific writing, and ethics. You'll meet regularly with your supervisor to shape your project.
+</p>
+<p><strong>Year two</strong> is usually the most data-intensive. You know what you're doing, your experiments are running, and you're deep in the work. This is often when the project starts to take on a life of its own — you find unexpected results, revise your questions, and begin to see the shape of your contribution. Many students also start presenting at conferences in year two.
+</p>
+<p><strong>Year three (and four, if you have it)</strong> is about pulling everything together. You'll write your thesis — a substantial document, typically 40,000 to 80,000 words depending on your field, that presents your findings and sets them in context. Some students publish papers from their PhD during this period. The final milestone is the viva voce: an oral examination where you defend your thesis to two examiners (one internal, one external to your university).
+</p>
+<h2>A Typical Week</h2>
+<p>There's no single "typical" week, because PhDs vary enormously depending on your field and project. But here's a realistic picture of what a lab-based science PhD might look like in year two:
+</p>
+<p><strong>Monday:</strong> Morning in the lab running experiments. Afternoon reading papers and planning the next set of experiments. Quick email exchange with your supervisor about results from last week.
+</p>
+<p><strong>Tuesday:</strong> Full day in the lab. Your cell cultures need feeding, your samples need processing, your equipment needs calibrating. This is the hands-on work that you, as an apprentice, will find deeply familiar.
+</p>
+<p><strong>Wednesday:</strong> Lab group meeting in the morning — everyone takes turns presenting their recent work informally to the group. Afternoon spent analysing data and updating your lab notebook.
+</p>
+<p><strong>Thursday:</strong> A seminar in the department (a visiting speaker talks about their research — free lunch if you're lucky). Afternoon writing up a section of your literature review or a draft paper.
+</p>
+<p><strong>Friday:</strong> Morning in the lab finishing off the week's experiments. Afternoon might be training, a workshop, or a meeting with your supervisor. Or, honestly, it might be catching up on admin or taking a slightly early finish.
+</p>
+<p><strong>Evenings and weekends:</strong> Mostly yours. Some weeks you'll work extra hours because an experiment demands it. Some weeks you'll finish at 4pm on a Friday. The rhythm is more flexible than a 9-to-5 job, which is both a gift and a challenge.
+</p>
+<h2>Your Supervisor</h2>
+<p>Your supervisor is your primary academic mentor. You'll typically meet them weekly or fortnightly, especially in the early stages. These meetings are where you discuss your progress, troubleshoot problems, plan next steps, and (ideally) get intellectual stimulation and encouragement.
+</p>
+<p>A good supervisor will push you intellectually while supporting you personally. They'll help you develop as an independent researcher, give honest feedback, and advocate for you when it matters. A less-good supervisor might be absent, overly critical, or disengaged.
+</p>
+<p>Choosing your supervisor carefully is one of the most important decisions you'll make. If possible, talk to their current PhD students before you commit. Ask what the supervisory relationship is like in practice, how often they meet, and how they handle problems.
+</p>
+<p>You'll also usually have a secondary supervisor or advisory panel — other academics who provide additional perspectives and serve as a safety net if things aren't working well with your primary supervisor.
+</p>
+<h2>The Emotional Landscape</h2>
+<p>PhDs are intellectually rewarding, but they can also be emotionally challenging. It's worth being prepared for this.
+</p>
+<p><strong>The highs:</strong> The buzz of getting an experiment to work. The excitement of finding something nobody has seen before. The pride of presenting your work at a conference. The satisfaction of finishing a chapter. The sense of becoming a genuine expert in your area.
+</p>
+<p><strong>The lows:</strong> Experiments that fail for weeks on end. Equipment that breaks at the worst time. The literature review that makes you feel like everything's already been done. The mid-PhD slump (usually mid-year-two) where you question whether any of it matters. The isolation of working on a topic that very few people in the world care about as deeply as you do.
+</p>
+<p><strong>The truth:</strong> Most PhD students experience both extremes, often in the same week. The key is having support structures in place — your supervisor, your lab group, your friends, your university's student support services — and knowing that the lows are temporary and normal.
+</p>
+<p>PhD students report higher rates of stress and anxiety than the general population. This isn't because PhDs attract anxious people (though imposter syndrome doesn't help); it's because the structure of doctoral work — long timescales, uncertain outcomes, limited immediate feedback — is inherently challenging. Take your mental health seriously. Use the support that's available. And remember that struggling isn't failing.
+</p>
+<h2>Skills You'll Build</h2>
+<p>A PhD trains you in far more than your specific research topic. By the end, you'll have developed expertise in project management (you've managed a multi-year project from conception to completion), critical thinking and analysis, scientific writing and communication, data analysis and statistics, time management and self-direction, presenting to both specialist and general audiences, and problem-solving under uncertainty.
+</p>
+<p>These skills are valued far beyond academia. Former PhD students work in industry R&D, science policy, consulting, publishing, science communication, teaching, intellectual property, regulatory affairs, and many other fields. A PhD doesn't lock you into an academic career — it opens a range of doors.
+</p>
+<h2>The Viva</h2>
+<p>The viva voce ("living voice") is your oral examination. It typically happens within three months of submitting your thesis. You'll sit with two examiners — one from your own university (the internal) and one from another institution (the external) — and discuss your work for one to three hours.
+</p>
+<p>The viva isn't a hostile interrogation. It's a scholarly conversation about your research. The examiners have read your thesis and they want to understand how you think, what decisions you made and why, and how your work contributes to the field. You've spent three to four years on this topic — you know more about it than almost anyone.
+</p>
+<p>Most students pass, often with minor corrections (small tweaks to the thesis text). Major corrections (significant additional work) are less common. Outright failure is very rare, because a well-supervised student shouldn't reach the viva stage unless the work is ready.
+</p>
+<h2>Is It Worth It?</h2>
+<p>Only you can answer that. But here's what we can say: a PhD is one of the few experiences where you spend years going deep on something you genuinely care about, surrounded by people who take ideas seriously. It's hard, rewarding, sometimes lonely, sometimes exhilarating. It will change how you think and what you're capable of.
+</p>
+<p>If you're curious enough to have read this far, you're probably curious enough to do one.
+</p>
+    </div>
+
+    <div class="guide-nav">
+        <a href="imposter-syndrome.html" class="prev">
+            <span class="guide-nav-label">← Previous</span>
+            <span class="guide-nav-title">You Belong Here</span>
+        </a>
+        <a href="self-assessment.html" class="next">
+            <span class="guide-nav-label">Next →</span>
+            <span class="guide-nav-title">Before You Apply: An Honest Self-Assessment</span>
+        </a>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <img src="../logo.png" alt="ARC logo" class="footer-logo-img">
+            <div class="footer-tagline">Not the Backup Plan.</div>
+            <div class="footer-links">
+                <a href="../">Home</a>
+                <a href="../guides.html">All Guides</a>
+                <a href="../#join">Get Involved</a>
+            </div>
+            <p>&copy; 2025 ARC — Apprentices into Research Careers</p>
+        </div>
+    </footer>
+</body>
+</html>

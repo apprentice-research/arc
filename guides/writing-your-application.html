@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Route Is Different. Your Application Should Be Too. — ARC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+
+:root {
+    --amber: #E8913A;
+    --amber-light: #F4C27F;
+    --amber-glow: #FFF3E0;
+    --teal: #1A6B5A;
+    --teal-deep: #0E4D3F;
+    --teal-light: #E8F5F1;
+    --cream: #FFFBF5;
+    --cream-mid: #FFF7ED;
+    --charcoal: #2D2A26;
+    --warm-gray: #6B6560;
+    --warm-gray-light: #A39E98;
+    --coral: #E85D4A;
+    --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    color: var(--charcoal);
+    background: var(--cream);
+    line-height: 1.7;
+    font-weight: 400;
+    overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255, 251, 245, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 20px rgba(45, 42, 38, 0.06);
+    transition: all 0.3s;
+}
+
+.nav-logo {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none; color: var(--charcoal);
+}
+
+.nav-logo-img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+}
+
+.nav-links {
+    display: flex; gap: 1.8rem; list-style: none; align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none; color: var(--warm-gray);
+    font-size: 0.88rem; font-weight: 500; transition: color 0.3s;
+    letter-spacing: 0.02em;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--teal); }
+
+.nav-cta {
+    background: var(--teal) !important; color: white !important;
+    padding: 0.5rem 1.3rem; border-radius: 100px;
+    font-weight: 600 !important; transition: all 0.3s;
+}
+
+.nav-cta:hover {
+    background: var(--teal-deep) !important;
+    transform: translateY(-1px);
+}
+
+.mobile-toggle {
+    display: none; background: none; border: none; cursor: pointer; padding: 0.5rem;
+}
+.mobile-toggle span {
+    display: block; width: 22px; height: 2px; background: var(--charcoal);
+    margin: 5px 0; transition: all 0.3s; border-radius: 2px;
+}
+
+/* ===== GUIDE PAGE ===== */
+.guide-header {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.guide-header::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header::after {
+    content: '';
+    position: absolute; bottom: -30%; left: -15%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26, 107, 90, 0.05) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header-inner {
+    max-width: 720px; margin: 0 auto; position: relative; z-index: 1;
+}
+
+.guide-breadcrumb {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.82rem; color: var(--warm-gray-light);
+    margin-bottom: 1.5rem; text-decoration: none;
+    transition: color 0.3s;
+}
+
+.guide-breadcrumb:hover { color: var(--teal); }
+
+.guide-breadcrumb svg { width: 14px; height: 14px; }
+
+.guide-number {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--teal-light); color: var(--teal);
+    padding: 0.35rem 1rem; border-radius: 100px;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+}
+
+.guide-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.15; color: var(--charcoal);
+    margin-bottom: 0.8rem; font-weight: 400;
+}
+
+.guide-subtitle {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto; line-height: 1.7;
+}
+
+/* ===== GUIDE CONTENT ===== */
+.guide-body {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 2rem 5rem;
+}
+
+.guide-body h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; color: var(--charcoal);
+    margin: 3rem 0 1rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+    margin: 2rem 0 0.8rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body p {
+    color: var(--warm-gray);
+    font-size: 1.02rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.85;
+}
+
+.guide-body p:first-child {
+    font-size: 1.1rem;
+    color: var(--charcoal);
+}
+
+.guide-body strong {
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+.guide-body em {
+    font-style: italic;
+}
+
+.guide-body blockquote,
+.guide-body .callout {
+    margin: 2rem 0;
+    padding: 1.5rem 1.5rem 1.5rem 2rem;
+    border-left: 3px solid var(--amber);
+    background: var(--amber-glow);
+    border-radius: 0 12px 12px 0;
+    font-size: 0.98rem;
+    color: var(--charcoal);
+    line-height: 1.7;
+}
+
+.guide-body a {
+    color: var(--teal);
+    text-decoration: underline;
+    text-decoration-color: rgba(26, 107, 90, 0.3);
+    text-underline-offset: 3px;
+    transition: all 0.2s;
+}
+
+.guide-body a:hover {
+    text-decoration-color: var(--teal);
+}
+
+/* ===== GUIDE NAV (prev/next) ===== */
+.guide-nav {
+    max-width: 700px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+    display: flex; justify-content: space-between; gap: 1rem;
+    border-top: 1px solid rgba(45, 42, 38, 0.08);
+    padding-top: 2rem;
+}
+
+.guide-nav a {
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.08);
+    transition: all 0.3s;
+    max-width: 48%;
+    display: flex; flex-direction: column; gap: 0.3rem;
+}
+
+.guide-nav a:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(45, 42, 38, 0.06);
+}
+
+.guide-nav-label {
+    font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--warm-gray-light);
+    font-weight: 600;
+}
+
+.guide-nav-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem; color: var(--charcoal); line-height: 1.3;
+}
+
+.guide-nav a.next { text-align: right; margin-left: auto; }
+
+/* ===== GUIDES INDEX ===== */
+.guides-hero {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+}
+
+.guides-hero::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guides-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: var(--charcoal); margin-bottom: 1rem;
+    font-weight: 400; position: relative; z-index: 1;
+}
+
+.guides-hero p {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto;
+    line-height: 1.7; position: relative; z-index: 1;
+}
+
+.guides-section {
+    max-width: 900px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+}
+
+.guides-category {
+    margin-bottom: 3rem;
+}
+
+.guides-category-label {
+    font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--amber); margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(45, 42, 38, 0.06);
+}
+
+.guide-card {
+    display: block; text-decoration: none;
+    padding: 1.3rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.06);
+    margin-bottom: 0.75rem;
+    transition: all 0.3s;
+}
+
+.guide-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(45, 42, 38, 0.06);
+}
+
+.guide-card-num {
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--teal); margin-bottom: 0.25rem;
+}
+
+.guide-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--charcoal);
+    margin-bottom: 0.3rem; line-height: 1.3;
+}
+
+.guide-card-desc {
+    font-size: 0.88rem; color: var(--warm-gray); line-height: 1.5;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background: var(--teal-deep);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.site-footer a {
+    color: var(--amber-light);
+    text-decoration: none;
+}
+
+.site-footer a:hover { text-decoration: underline; }
+
+.footer-inner {
+    max-width: 600px; margin: 0 auto;
+}
+
+.footer-logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+    color: var(--amber-light);
+    font-size: 0.9rem; margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.footer-links {
+    display: flex; gap: 1.5rem; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-toggle { display: block; }
+    nav.open .nav-links {
+        display: flex; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(255, 251, 245, 0.98);
+        backdrop-filter: blur(12px);
+        padding: 1rem 2rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(45, 42, 38, 0.08);
+    }
+    .guide-nav { flex-direction: column; }
+    .guide-nav a { max-width: 100%; }
+    .guide-nav a.next { text-align: left; }
+}
+
+@media (max-width: 480px) {
+    .guide-header { padding: 7rem 1.2rem 2rem; }
+    .guide-body { padding: 1.5rem 1.2rem 4rem; }
+    .guide-body h2 { font-size: 1.4rem; }
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="nav-logo">
+            <img src="../logo.png" alt="ARC logo" class="nav-logo-img">
+            <span class="nav-logo-text">ARC</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../index.html" >Home</a></li>
+            <li><a href="../guides.html" class='active'>Guides</a></li>
+            <li><a href="../index.html#join" class="nav-cta">Get Involved</a></li>
+        </ul>
+        <button class="mobile-toggle" onclick="this.closest('nav').classList.toggle('open')" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="guide-header">
+        <div class="guide-header-inner">
+            <a href="../guides.html" class="guide-breadcrumb">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                All Guides
+            </a>
+            <div class="guide-number">Guide 1</div>
+            <h1>Your Route Is Different. Your Application Should Be Too.</h1>
+            <p class="guide-subtitle">A step-by-step guide to writing personal statements, CVs, and cover letters when you didn't take the standard path.</p>
+        </div>
+    </div>
+
+    <div class="guide-body">
+        <h2>Why This Guide Exists</h2>
+<p>Every application guide you'll find online assumes the same thing: that you went to school, did A-levels, went to university, and are now applying for the next step. If that's not your story — if you came through an apprenticeship — those guides leave you stranded.
+</p>
+<p>You end up trying to squeeze your experience into a template that wasn't designed for it, and wondering why it feels awkward.
+</p>
+<p>This guide is different. It's written specifically for people who got their science training through an apprenticeship and are now applying for university, a master's, or a PhD. Your route isn't a weakness to explain away. It's a story worth telling well.
+</p>
+<h2>Part 1: The Personal Statement</h2>
+<p>A personal statement is your chance to explain who you are, what you've done, and why you want to take this next step. For most science programmes, it should be between 500 and 1,000 words — roughly one to two pages.
+</p>
+<p><strong>What admissions teams actually want to see:</strong>
+</p>
+<p>They want to understand three things. First, that you know what you're getting into and you've chosen this programme for specific, considered reasons. Second, that your background has prepared you to succeed. And third, that you have the motivation to see it through.
+</p>
+<p>Notice what's not on that list: a perfect, linear academic trajectory. They're not looking for someone who ticked every box in the "right" order. They're looking for someone who can do the work and wants to do it.
+</p>
+<p><strong>How to structure it:</strong>
+</p>
+<p>Open with what drives you. Not a grand philosophical statement about the nature of science — something specific. What was the moment, the experiment, the problem at work that made you think, "I want to understand this more deeply"? If it happened during your apprenticeship, say so. That's a much more compelling opening than "I have always been interested in biology."
+</p>
+<p>Then talk about what you've done. This is where your apprenticeship becomes your biggest asset. You haven't just read about science — you've done it. You've worked in a functioning lab, or a hospital, or a manufacturing environment. You've handled real samples, troubleshot real problems, followed real protocols. Be specific. Don't just say "I gained laboratory skills." Say what you actually did: "I routinely carried out qPCR on patient-derived samples" or "I optimised a cell culture protocol that reduced contamination rates by 40%." Specifics are persuasive. Generalities are forgettable.
+</p>
+<p>After that, explain why this programme, at this institution. This means you need to do your homework. Look at the modules. Look at the research groups. If you're applying for a PhD, read some of your potential supervisor's recent papers. Mention something specific that connects your interests to what they offer. This shows you've thought about it seriously, not just applied everywhere.
+</p>
+<p>Finally, look forward briefly. Where do you want this to take you? You don't need a five-year plan. But showing that you've thought about how this step connects to your longer-term goals demonstrates maturity and purpose.
+</p>
+<p><strong>The elephant in the room: should you mention your apprenticeship explicitly?</strong>
+</p>
+<p>Yes. Don't hide it, don't apologise for it, and don't bury it in a subordinate clause. Your apprenticeship is how you got here, and it gave you things that traditional students don't have. Name it clearly and frame it as the asset it is.
+</p>
+<p>Something like: "I entered science through a Level 3 Laboratory Technician apprenticeship at [employer], where I spent two years working in [type of lab]. This gave me a grounding in practical science that has shaped how I think about research: I approach problems with the question 'how would this work in practice?' before anything else."
+</p>
+<p>That's not defensive. It's confident. And it tells the reader something distinctive about how you think.
+</p>
+<p><strong>What not to do:</strong>
+</p>
+<p>Don't spend your word count explaining the apprenticeship system. The admissions team knows what an apprenticeship is. If they don't, that's a sentence at most — not a paragraph.
+</p>
+<p>Don't use your personal statement to argue that apprenticeships are undervalued. You may be right, but this isn't the place. The personal statement is about you.
+</p>
+<p>Don't try to sound like someone you're not. If you've never written an academic essay before, don't suddenly adopt the voice of someone who writes them weekly. Write clearly, write specifically, and write like yourself. Authenticity is always more impressive than affectation.
+</p>
+<h2>Part 2: Your CV</h2>
+<p>If you're applying for a PhD, you'll usually need an academic CV alongside your personal statement. This can feel awkward if your experience is mostly professional rather than academic, but the format works in your favour if you approach it right.
+</p>
+<p><strong>Layout:</strong>
+</p>
+<p>Start with your education and qualifications — apprenticeship, any additional certifications (RSciTech, RSci), any further study. List these with dates, institutions, and the qualification gained.
+</p>
+<p>Then a section on professional experience. This is where you have an advantage over most applicants. List your roles with dates, employer, and a brief description of what you actually did. Focus on anything involving scientific techniques, problem-solving, project work, or independent responsibility.
+</p>
+<p>If you have any of the following, give them their own sections: publications or conference presentations (even posters count), awards or recognition, relevant training or courses, professional memberships, and outreach or public engagement activities.
+</p>
+<p><strong>A note on "publications":</strong> If you haven't published anything, that's fine — many PhD applicants haven't. But if you've contributed to a report, co-authored an internal paper, presented findings to your team, or written up a case study, consider whether it's worth including. Academic publications aren't the only way to demonstrate scientific communication.
+</p>
+<h2>Part 3: The Cover Letter or Email</h2>
+<p>Some applications ask for a covering letter rather than (or in addition to) a personal statement. This is shorter — typically half a page to one page — and more focused.
+</p>
+<p>A good cover letter does three things quickly. It tells them what you're applying for. It gives a brief snapshot of why you're a strong candidate (your headline credentials and experience). And it signals that you've engaged with the specific opportunity, not just fired off a generic application.
+</p>
+<p>Keep it professional but human. "Dear Professor [Name]" is correct for PhD applications. Sign off with "Yours sincerely" if you've used their name.
+</p>
+<h2>Part 4: References</h2>
+<p>You'll need references — usually two. The strongest combination for someone from an apprenticeship background is one professional reference (your line manager, lab lead, or training coordinator) and one academic reference (a lecturer from your apprenticeship programme, or a tutor from any further study).
+</p>
+<p>If you don't have an academic reference, a senior scientific colleague who can speak to your intellectual ability and curiosity is a reasonable substitute. Talk to them in advance: let them know what you're applying for, remind them of specific things you've worked on, and give them enough time to write something thoughtful.
+</p>
+<h2>The Bigger Picture</h2>
+<p>Your application tells a story. For most applicants, that story is a straight line: school → university → next step. Your story has a different shape, and that's what makes it interesting. You entered science by doing it. You chose to go further not because it was the expected next step, but because you were curious enough and ambitious enough to seek it out.
+</p>
+<p>That's a powerful narrative. Tell it well.
+</p>
+    </div>
+
+    <div class="guide-nav">
+        <a href="useful-links.html" class="prev">
+            <span class="guide-nav-label">← Previous</span>
+            <span class="guide-nav-title">Useful Links and Organisations</span>
+        </a>
+        <a href="finding-a-supervisor.html" class="next">
+            <span class="guide-nav-label">Next →</span>
+            <span class="guide-nav-title">Finding Your Supervisor: The Unwritten Rules</span>
+        </a>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <img src="../logo.png" alt="ARC logo" class="footer-logo-img">
+            <div class="footer-tagline">Not the Backup Plan.</div>
+            <div class="footer-links">
+                <a href="../">Home</a>
+                <a href="../guides.html">All Guides</a>
+                <a href="../#join">Get Involved</a>
+            </div>
+            <p>&copy; 2025 ARC — Apprentices into Research Careers</p>
+        </div>
+    </footer>
+</body>
+</html>

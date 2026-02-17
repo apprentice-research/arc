@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The PhD Interview — ARC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+
+:root {
+    --amber: #E8913A;
+    --amber-light: #F4C27F;
+    --amber-glow: #FFF3E0;
+    --teal: #1A6B5A;
+    --teal-deep: #0E4D3F;
+    --teal-light: #E8F5F1;
+    --cream: #FFFBF5;
+    --cream-mid: #FFF7ED;
+    --charcoal: #2D2A26;
+    --warm-gray: #6B6560;
+    --warm-gray-light: #A39E98;
+    --coral: #E85D4A;
+    --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    color: var(--charcoal);
+    background: var(--cream);
+    line-height: 1.7;
+    font-weight: 400;
+    overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255, 251, 245, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 20px rgba(45, 42, 38, 0.06);
+    transition: all 0.3s;
+}
+
+.nav-logo {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none; color: var(--charcoal);
+}
+
+.nav-logo-img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+}
+
+.nav-links {
+    display: flex; gap: 1.8rem; list-style: none; align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none; color: var(--warm-gray);
+    font-size: 0.88rem; font-weight: 500; transition: color 0.3s;
+    letter-spacing: 0.02em;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--teal); }
+
+.nav-cta {
+    background: var(--teal) !important; color: white !important;
+    padding: 0.5rem 1.3rem; border-radius: 100px;
+    font-weight: 600 !important; transition: all 0.3s;
+}
+
+.nav-cta:hover {
+    background: var(--teal-deep) !important;
+    transform: translateY(-1px);
+}
+
+.mobile-toggle {
+    display: none; background: none; border: none; cursor: pointer; padding: 0.5rem;
+}
+.mobile-toggle span {
+    display: block; width: 22px; height: 2px; background: var(--charcoal);
+    margin: 5px 0; transition: all 0.3s; border-radius: 2px;
+}
+
+/* ===== GUIDE PAGE ===== */
+.guide-header {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.guide-header::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header::after {
+    content: '';
+    position: absolute; bottom: -30%; left: -15%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26, 107, 90, 0.05) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header-inner {
+    max-width: 720px; margin: 0 auto; position: relative; z-index: 1;
+}
+
+.guide-breadcrumb {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.82rem; color: var(--warm-gray-light);
+    margin-bottom: 1.5rem; text-decoration: none;
+    transition: color 0.3s;
+}
+
+.guide-breadcrumb:hover { color: var(--teal); }
+
+.guide-breadcrumb svg { width: 14px; height: 14px; }
+
+.guide-number {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--teal-light); color: var(--teal);
+    padding: 0.35rem 1rem; border-radius: 100px;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+}
+
+.guide-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.15; color: var(--charcoal);
+    margin-bottom: 0.8rem; font-weight: 400;
+}
+
+.guide-subtitle {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto; line-height: 1.7;
+}
+
+/* ===== GUIDE CONTENT ===== */
+.guide-body {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 2rem 5rem;
+}
+
+.guide-body h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; color: var(--charcoal);
+    margin: 3rem 0 1rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+    margin: 2rem 0 0.8rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body p {
+    color: var(--warm-gray);
+    font-size: 1.02rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.85;
+}
+
+.guide-body p:first-child {
+    font-size: 1.1rem;
+    color: var(--charcoal);
+}
+
+.guide-body strong {
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+.guide-body em {
+    font-style: italic;
+}
+
+.guide-body blockquote,
+.guide-body .callout {
+    margin: 2rem 0;
+    padding: 1.5rem 1.5rem 1.5rem 2rem;
+    border-left: 3px solid var(--amber);
+    background: var(--amber-glow);
+    border-radius: 0 12px 12px 0;
+    font-size: 0.98rem;
+    color: var(--charcoal);
+    line-height: 1.7;
+}
+
+.guide-body a {
+    color: var(--teal);
+    text-decoration: underline;
+    text-decoration-color: rgba(26, 107, 90, 0.3);
+    text-underline-offset: 3px;
+    transition: all 0.2s;
+}
+
+.guide-body a:hover {
+    text-decoration-color: var(--teal);
+}
+
+/* ===== GUIDE NAV (prev/next) ===== */
+.guide-nav {
+    max-width: 700px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+    display: flex; justify-content: space-between; gap: 1rem;
+    border-top: 1px solid rgba(45, 42, 38, 0.08);
+    padding-top: 2rem;
+}
+
+.guide-nav a {
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.08);
+    transition: all 0.3s;
+    max-width: 48%;
+    display: flex; flex-direction: column; gap: 0.3rem;
+}
+
+.guide-nav a:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(45, 42, 38, 0.06);
+}
+
+.guide-nav-label {
+    font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--warm-gray-light);
+    font-weight: 600;
+}
+
+.guide-nav-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem; color: var(--charcoal); line-height: 1.3;
+}
+
+.guide-nav a.next { text-align: right; margin-left: auto; }
+
+/* ===== GUIDES INDEX ===== */
+.guides-hero {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+}
+
+.guides-hero::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guides-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: var(--charcoal); margin-bottom: 1rem;
+    font-weight: 400; position: relative; z-index: 1;
+}
+
+.guides-hero p {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto;
+    line-height: 1.7; position: relative; z-index: 1;
+}
+
+.guides-section {
+    max-width: 900px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+}
+
+.guides-category {
+    margin-bottom: 3rem;
+}
+
+.guides-category-label {
+    font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--amber); margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(45, 42, 38, 0.06);
+}
+
+.guide-card {
+    display: block; text-decoration: none;
+    padding: 1.3rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.06);
+    margin-bottom: 0.75rem;
+    transition: all 0.3s;
+}
+
+.guide-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(45, 42, 38, 0.06);
+}
+
+.guide-card-num {
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--teal); margin-bottom: 0.25rem;
+}
+
+.guide-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--charcoal);
+    margin-bottom: 0.3rem; line-height: 1.3;
+}
+
+.guide-card-desc {
+    font-size: 0.88rem; color: var(--warm-gray); line-height: 1.5;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background: var(--teal-deep);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.site-footer a {
+    color: var(--amber-light);
+    text-decoration: none;
+}
+
+.site-footer a:hover { text-decoration: underline; }
+
+.footer-inner {
+    max-width: 600px; margin: 0 auto;
+}
+
+.footer-logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+    color: var(--amber-light);
+    font-size: 0.9rem; margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.footer-links {
+    display: flex; gap: 1.5rem; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-toggle { display: block; }
+    nav.open .nav-links {
+        display: flex; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(255, 251, 245, 0.98);
+        backdrop-filter: blur(12px);
+        padding: 1rem 2rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(45, 42, 38, 0.08);
+    }
+    .guide-nav { flex-direction: column; }
+    .guide-nav a { max-width: 100%; }
+    .guide-nav a.next { text-align: left; }
+}
+
+@media (max-width: 480px) {
+    .guide-header { padding: 7rem 1.2rem 2rem; }
+    .guide-body { padding: 1.5rem 1.2rem 4rem; }
+    .guide-body h2 { font-size: 1.4rem; }
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="nav-logo">
+            <img src="../logo.png" alt="ARC logo" class="nav-logo-img">
+            <span class="nav-logo-text">ARC</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../index.html" >Home</a></li>
+            <li><a href="../guides.html" class='active'>Guides</a></li>
+            <li><a href="../index.html#join" class="nav-cta">Get Involved</a></li>
+        </ul>
+        <button class="mobile-toggle" onclick="this.closest('nav').classList.toggle('open')" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="guide-header">
+        <div class="guide-header-inner">
+            <a href="../guides.html" class="guide-breadcrumb">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                All Guides
+            </a>
+            <div class="guide-number">Guide 12</div>
+            <h1>The PhD Interview</h1>
+            <p class="guide-subtitle">What to expect, what they're looking for, and how to show them who you are — even when you're terrified.</p>
+        </div>
+    </div>
+
+    <div class="guide-body">
+        <h2>Why This Guide Exists</h2>
+<p>You've found a project, emailed the supervisor, written the application — and now you've been invited to interview. Congratulations. That invitation means they think you might be good enough. The interview is where you prove them right.
+</p>
+<p>But if you've never set foot in a university department, the whole thing can feel like walking into someone else's house and trying to act like you live there. You don't know the conventions. You don't know the dress code. You don't know what "present your research interests for ten minutes" actually means when you've never done it before.
+</p>
+<p>This guide walks you through the entire process, from what to expect when you arrive to what to ask at the end. It's written for people who've never done a PhD interview and don't have a supervisor or lecturer to coach them through it.
+</p>
+<h2>What Format Will It Take?</h2>
+<p>PhD interviews vary depending on the type of studentship. Understanding which format you're walking into makes a big difference to how you prepare.
+</p>
+<p><strong>Supervisor-led interviews</strong> are the most informal. You meet the potential supervisor — sometimes with a second academic — and have a conversation about the project, your background, and your interests. It might happen over a video call, a coffee, or in their office. It's a two-way assessment: they're deciding whether they want to work with you, and you're deciding whether you want to work with them.
+</p>
+<p><strong>DTP or CDT panel interviews</strong> are more formal. You'll sit in front of a panel — typically two to four academics, sometimes including someone from outside the specific research area. You may be asked to give a short presentation (usually five to fifteen minutes) followed by questions. The panel has to rank candidates, so the stakes feel higher. They are — but the format also gives you a structured opportunity to show what you know.
+</p>
+<p><strong>Group interview days</strong> are less common but some large programmes run them. You might have a group task, a presentation, and a one-to-one interview all in the same day. There may also be informal time with current PhD students — this isn't formally assessed, but it is part of the impression you leave.
+</p>
+<p>Most interviews now happen online for at least the initial stage, though some still offer or require in-person visits. If it's online, test your setup in advance: camera, microphone, internet connection, lighting, background. Technical problems are forgivable but distracting.
+</p>
+<h2>What They're Actually Looking For</h2>
+<p>Here's the honest version. Interview panels are not trying to catch you out. They're trying to answer three questions:
+</p>
+<p><strong>Does this person understand what they're getting into?</strong> They want to see that you know what a PhD involves — the timescale, the commitment, the nature of research. They want evidence that you've thought seriously about this, not just applied on impulse.
+</p>
+<p><strong>Can this person think?</strong> They want to see how you engage with ideas. Can you discuss a scientific concept clearly? Can you think through a question you haven't prepared for? Can you acknowledge what you don't know without falling apart? This matters more than having perfect answers.
+</p>
+<p><strong>Would this person be a good addition to the research group?</strong> Supervisors will spend years working closely with you. They want someone who communicates well, responds constructively to challenge, shows genuine enthusiasm for the work, and seems like someone they'd enjoy mentoring.
+</p>
+<p>Notice what's not on this list: a flawless academic history. They're not looking for the applicant who has done everything perfectly. They're looking for the one who can think, communicate, and commit.
+</p>
+<h2>The Questions You'll Face</h2>
+<p>Every interview is different, but certain questions come up repeatedly. Here are the most common, with guidance on how to approach them from an apprenticeship background.
+</p>
+<p><strong>"Tell us about yourself."</strong> This is your opening. Don't recite your CV — they've read it. Instead, give a brief narrative: where you started, what drew you to science, how your apprenticeship shaped your interests, and what brought you to this application. Two to three minutes is plenty. End with why you're here today.
+</p>
+<p><strong>"Why do you want to do a PhD?"</strong> Be specific. "I want to contribute to knowledge" is too vague. Link it to something concrete — a question that arose during your work, a paper that fascinated you, a problem you encountered that you wanted to investigate properly. If your curiosity has a specific origin story, tell it.
+</p>
+<p><strong>"Why this project / this department / this supervisor?"</strong> This is where preparation pays off. Reference the supervisor's recent work — a specific paper, a specific technique, a specific finding that connects to your interests. Show that you've read and thought about their research, not just the advert. For DTP applications, also explain how the programme's training provision appeals to you and why the broader theme fits your goals.
+</p>
+<p><strong>"Tell us about your research experience."</strong> If you're coming from an apprenticeship, this is where you reframe your professional experience as research experience. Protocol optimisation is method development. Troubleshooting is hypothesis testing. Quality control is data analysis. Be specific about what you did, what you found, and what you learned. If you've done any additional research — a placement, a volunteer project, a dissertation — describe it clearly: the question, the approach, the outcome.
+</p>
+<p><strong>"What would you do if your experiments didn't work?"</strong> They're testing your resilience and your problem-solving process. A good answer involves systematic troubleshooting: check your controls, verify your reagents, review the method, consult the literature, discuss with your supervisor. Then show flexibility — sometimes the answer is to redesign the approach, not repeat it indefinitely.
+</p>
+<p><strong>"What are your strengths and weaknesses?"</strong> Be honest with both. For strengths, choose something relevant and back it with evidence: "I'm good at troubleshooting — in my previous role, I identified and resolved a recurring contamination issue that had been affecting results for months." For weaknesses, choose something real but manageable, and explain what you're doing about it: "I haven't had much experience with academic writing, which is why I've been taking an online course in scientific communication and practising by summarising papers."
+</p>
+<p><strong>"Where do you see yourself after the PhD?"</strong> You don't need a fixed career plan. But show that you've thought about it. It's fine to say you're interested in academic research, or industry R&D, or that you want to keep your options open while developing your skills. The panel wants reassurance that you see the PhD as part of a longer trajectory, not an end in itself.
+</p>
+<p><strong>"Do you have any questions for us?"</strong> Always say yes. This is your chance to learn important things and to demonstrate engagement. More on this below.
+</p>
+<h2>If You're Asked to Present</h2>
+<p>Some interviews include a presentation — usually about your research interests, your background, or a paper you've been asked to read. Here's how to handle it.
+</p>
+<p><strong>Stick to the time limit.</strong> If they say ten minutes, prepare for eight. Going over time is one of the most common mistakes and it signals poor preparation.
+</p>
+<p><strong>Structure clearly.</strong> Open with the question or topic you're addressing. Walk through your points logically. Conclude with a clear summary. If you're presenting your background and interests, a sensible structure is: who I am and where I come from, what I've done (key experience), what interests me and why, how this project fits.
+</p>
+<p><strong>Use slides if you're allowed to, but don't overload them.</strong> A few clear slides with key points, images, or diagrams are far more effective than walls of text. If you're presenting a paper, include the key figures and explain what they show.
+</p>
+<p><strong>Practise out loud.</strong> Not in your head — actually say the words. Time yourself. Record yourself if you can stand to watch it back. The first time you deliver a presentation should not be in the interview.
+</p>
+<p><strong>Expect questions during or after.</strong> Panel members may interrupt to ask for clarification or to probe your understanding. This is normal and not hostile — it means they're engaged. If you don't know the answer, say so clearly: "I'm not sure about that, but my thinking would be..." is far better than bluffing.
+</p>
+<h2>Questions to Ask Them</h2>
+<p>Asking thoughtful questions serves two purposes: it demonstrates your engagement, and it helps you decide whether this is the right place for you. Here are some good ones:
+</p>
+<p>"What does a typical supervisory meeting look like, and how often do you meet with your students?" This tells you about the day-to-day relationship.
+</p>
+<p>"Are there opportunities for conference attendance and training beyond the core project?" This shows you're thinking about your broader development.
+</p>
+<p>"What's the research group like — how many PhD students and postdocs are there currently?" This helps you understand whether you'd have peer support.
+</p>
+<p>"Is there flexibility to shape the project direction as it develops, or is the scope fairly fixed?" This is particularly relevant for advertised projects.
+</p>
+<p>"Could I speak to a current PhD student in the group?" If they say yes, this is incredibly valuable. If they seem reluctant, that's informative too.
+</p>
+<p>Don't ask about things that are clearly stated in the advert (the stipend, the start date, the duration). Do ask about things that matter to your experience and that you can't find out from the website.
+</p>
+<h2>Practical Preparation</h2>
+<p><strong>The day before:</strong> Re-read the project description, the supervisor's recent papers (at least the abstracts), and your own application. Have your presentation ready if there is one. Check the logistics — the video link, the room location, the travel time.
+</p>
+<p><strong>What to wear:</strong> Smart but not corporate. You're not interviewing for a banking job. Clean, neat, professional. For lab-based science PhDs, think smart casual — you wouldn't look out of place if they invited you to see the lab afterwards.
+</p>
+<p><strong>On the day:</strong> Arrive (or log on) early. Bring a printed copy of your application and any notes you've made — you won't necessarily use them, but having them there reduces anxiety. Take a glass of water. Breathe.
+</p>
+<p><strong>During the interview:</strong> Listen carefully to each question. It's fine to take a moment to think before answering. Make eye contact (or look at the camera for online interviews). Be yourself — nervous is fine, robotic isn't. If you don't understand a question, ask them to rephrase it. If you don't know the answer, say so honestly and then offer your best reasoning.
+</p>
+<h2>A Word to Apprentices Specifically</h2>
+<p>You may be sitting across from people who've spent their entire careers in universities. You may feel like you don't speak their language. You may worry that your background makes you look less credible.
+</p>
+<p>Here's what's actually true: you have something most candidates don't. You've done science in the real world, under real constraints, with real consequences. You've worked in functioning laboratories, with real patients or real products or real deadlines. You can troubleshoot equipment, manage protocols, and work independently — skills that many first-year PhD students spend months learning.
+</p>
+<p>Your route is different. In an interview, different is memorable. Own your story, be specific about your experience, and let your curiosity show. That's what they're looking for.
+</p>
+    </div>
+
+    <div class="guide-nav">
+        <a href="employer-conversation.html" class="prev">
+            <span class="guide-nav-label">← Previous</span>
+            <span class="guide-nav-title">Telling Your Employer You Want More</span>
+        </a>
+        <a href="life-after-phd.html" class="next">
+            <span class="guide-nav-label">Next →</span>
+            <span class="guide-nav-title">What Comes After?</span>
+        </a>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <img src="../logo.png" alt="ARC logo" class="footer-logo-img">
+            <div class="footer-tagline">Not the Backup Plan.</div>
+            <div class="footer-links">
+                <a href="../">Home</a>
+                <a href="../guides.html">All Guides</a>
+                <a href="../#join">Get Involved</a>
+            </div>
+            <p>&copy; 2025 ARC — Apprentices into Research Careers</p>
+        </div>
+    </footer>
+</body>
+</html>

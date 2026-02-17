@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guides — ARC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+
+:root {
+    --amber: #E8913A;
+    --amber-light: #F4C27F;
+    --amber-glow: #FFF3E0;
+    --teal: #1A6B5A;
+    --teal-deep: #0E4D3F;
+    --teal-light: #E8F5F1;
+    --cream: #FFFBF5;
+    --cream-mid: #FFF7ED;
+    --charcoal: #2D2A26;
+    --warm-gray: #6B6560;
+    --warm-gray-light: #A39E98;
+    --coral: #E85D4A;
+    --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    color: var(--charcoal);
+    background: var(--cream);
+    line-height: 1.7;
+    font-weight: 400;
+    overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255, 251, 245, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 20px rgba(45, 42, 38, 0.06);
+    transition: all 0.3s;
+}
+
+.nav-logo {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none; color: var(--charcoal);
+}
+
+.nav-logo-img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+}
+
+.nav-links {
+    display: flex; gap: 1.8rem; list-style: none; align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none; color: var(--warm-gray);
+    font-size: 0.88rem; font-weight: 500; transition: color 0.3s;
+    letter-spacing: 0.02em;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--teal); }
+
+.nav-cta {
+    background: var(--teal) !important; color: white !important;
+    padding: 0.5rem 1.3rem; border-radius: 100px;
+    font-weight: 600 !important; transition: all 0.3s;
+}
+
+.nav-cta:hover {
+    background: var(--teal-deep) !important;
+    transform: translateY(-1px);
+}
+
+.mobile-toggle {
+    display: none; background: none; border: none; cursor: pointer; padding: 0.5rem;
+}
+.mobile-toggle span {
+    display: block; width: 22px; height: 2px; background: var(--charcoal);
+    margin: 5px 0; transition: all 0.3s; border-radius: 2px;
+}
+
+/* ===== GUIDE PAGE ===== */
+.guide-header {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.guide-header::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header::after {
+    content: '';
+    position: absolute; bottom: -30%; left: -15%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26, 107, 90, 0.05) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header-inner {
+    max-width: 720px; margin: 0 auto; position: relative; z-index: 1;
+}
+
+.guide-breadcrumb {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.82rem; color: var(--warm-gray-light);
+    margin-bottom: 1.5rem; text-decoration: none;
+    transition: color 0.3s;
+}
+
+.guide-breadcrumb:hover { color: var(--teal); }
+
+.guide-breadcrumb svg { width: 14px; height: 14px; }
+
+.guide-number {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--teal-light); color: var(--teal);
+    padding: 0.35rem 1rem; border-radius: 100px;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+}
+
+.guide-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.15; color: var(--charcoal);
+    margin-bottom: 0.8rem; font-weight: 400;
+}
+
+.guide-subtitle {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto; line-height: 1.7;
+}
+
+/* ===== GUIDE CONTENT ===== */
+.guide-body {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 2rem 5rem;
+}
+
+.guide-body h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; color: var(--charcoal);
+    margin: 3rem 0 1rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+    margin: 2rem 0 0.8rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body p {
+    color: var(--warm-gray);
+    font-size: 1.02rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.85;
+}
+
+.guide-body p:first-child {
+    font-size: 1.1rem;
+    color: var(--charcoal);
+}
+
+.guide-body strong {
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+.guide-body em {
+    font-style: italic;
+}
+
+.guide-body blockquote,
+.guide-body .callout {
+    margin: 2rem 0;
+    padding: 1.5rem 1.5rem 1.5rem 2rem;
+    border-left: 3px solid var(--amber);
+    background: var(--amber-glow);
+    border-radius: 0 12px 12px 0;
+    font-size: 0.98rem;
+    color: var(--charcoal);
+    line-height: 1.7;
+}
+
+.guide-body a {
+    color: var(--teal);
+    text-decoration: underline;
+    text-decoration-color: rgba(26, 107, 90, 0.3);
+    text-underline-offset: 3px;
+    transition: all 0.2s;
+}
+
+.guide-body a:hover {
+    text-decoration-color: var(--teal);
+}
+
+/* ===== GUIDE NAV (prev/next) ===== */
+.guide-nav {
+    max-width: 700px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+    display: flex; justify-content: space-between; gap: 1rem;
+    border-top: 1px solid rgba(45, 42, 38, 0.08);
+    padding-top: 2rem;
+}
+
+.guide-nav a {
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.08);
+    transition: all 0.3s;
+    max-width: 48%;
+    display: flex; flex-direction: column; gap: 0.3rem;
+}
+
+.guide-nav a:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(45, 42, 38, 0.06);
+}
+
+.guide-nav-label {
+    font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--warm-gray-light);
+    font-weight: 600;
+}
+
+.guide-nav-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem; color: var(--charcoal); line-height: 1.3;
+}
+
+.guide-nav a.next { text-align: right; margin-left: auto; }
+
+/* ===== GUIDES INDEX ===== */
+.guides-hero {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+}
+
+.guides-hero::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guides-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: var(--charcoal); margin-bottom: 1rem;
+    font-weight: 400; position: relative; z-index: 1;
+}
+
+.guides-hero p {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto;
+    line-height: 1.7; position: relative; z-index: 1;
+}
+
+.guides-section {
+    max-width: 900px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+}
+
+.guides-category {
+    margin-bottom: 3rem;
+}
+
+.guides-category-label {
+    font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--amber); margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(45, 42, 38, 0.06);
+}
+
+.guide-card {
+    display: block; text-decoration: none;
+    padding: 1.3rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.06);
+    margin-bottom: 0.75rem;
+    transition: all 0.3s;
+}
+
+.guide-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(45, 42, 38, 0.06);
+}
+
+.guide-card-num {
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--teal); margin-bottom: 0.25rem;
+}
+
+.guide-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--charcoal);
+    margin-bottom: 0.3rem; line-height: 1.3;
+}
+
+.guide-card-desc {
+    font-size: 0.88rem; color: var(--warm-gray); line-height: 1.5;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background: var(--teal-deep);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.site-footer a {
+    color: var(--amber-light);
+    text-decoration: none;
+}
+
+.site-footer a:hover { text-decoration: underline; }
+
+.footer-inner {
+    max-width: 600px; margin: 0 auto;
+}
+
+.footer-logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+    color: var(--amber-light);
+    font-size: 0.9rem; margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.footer-links {
+    display: flex; gap: 1.5rem; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-toggle { display: block; }
+    nav.open .nav-links {
+        display: flex; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(255, 251, 245, 0.98);
+        backdrop-filter: blur(12px);
+        padding: 1rem 2rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(45, 42, 38, 0.08);
+    }
+    .guide-nav { flex-direction: column; }
+    .guide-nav a { max-width: 100%; }
+    .guide-nav a.next { text-align: left; }
+}
+
+@media (max-width: 480px) {
+    .guide-header { padding: 7rem 1.2rem 2rem; }
+    .guide-body { padding: 1.5rem 1.2rem 4rem; }
+    .guide-body h2 { font-size: 1.4rem; }
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="./index.html" class="nav-logo">
+            <img src="./logo.png" alt="ARC logo" class="nav-logo-img">
+            <span class="nav-logo-text">ARC</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="./index.html" >Home</a></li>
+            <li><a href="./guides.html" class='active'>Guides</a></li>
+            <li><a href="./index.html#join" class="nav-cta">Get Involved</a></li>
+        </ul>
+        <button class="mobile-toggle" onclick="this.closest('nav').classList.toggle('open')" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="guides-hero">
+        <h1>Guides &amp; Resources</h1>
+        <p>Everything you need to navigate the journey from apprenticeship to research career. Written by people who've been through it.</p>
+    </div>
+
+    <div class="guides-section">
+        <div class="guides-category">
+  <div class="guides-category-label">Getting Ready</div>
+  <a href="guides/self-assessment.html" class="guide-card">
+    <div class="guide-card-num">Guide 6</div>
+    <div class="guide-card-title">Before You Apply: An Honest Self-Assessment</div>
+    <div class="guide-card-desc">A PhD is brilliant — but it's not for everyone. Here's how to figure out whether it's right for you.</div>
+  </a>
+  <a href="guides/reading-papers.html" class="guide-card">
+    <div class="guide-card-num">Guide 8</div>
+    <div class="guide-card-title">How to Read a Scientific Paper</div>
+    <div class="guide-card-desc">It's a skill, not a talent. Here's how to learn it.</div>
+  </a>
+  <a href="guides/masters-vs-phd.html" class="guide-card">
+    <div class="guide-card-num">Guide 9</div>
+    <div class="guide-card-title">Do I Need a Master's?</div>
+    <div class="guide-card-desc">The honest answer is "it depends." Here's how to figure out what's right for you.</div>
+  </a>
+  <a href="guides/building-experience.html" class="guide-card">
+    <div class="guide-card-num">Guide 10</div>
+    <div class="guide-card-title">Getting Research Experience Before You Apply</div>
+    <div class="guide-card-desc">Practical ways to bridge the gap between your apprenticeship and a PhD application.</div>
+  </a>
+  <a href="guides/networking.html" class="guide-card">
+    <div class="guide-card-num">Guide 15</div>
+    <div class="guide-card-title">Building Your Network from Scratch</div>
+    <div class="guide-card-desc">How to make professional connections in science when you're starting from absolutely nobody.</div>
+  </a>
+</div>
+<div class="guides-category">
+  <div class="guides-category-label">Understanding Your Options</div>
+  <a href="guides/apprenticeship-levels.html" class="guide-card">
+    <div class="guide-card-num">Resource</div>
+    <div class="guide-card-title">What Are the Different Apprenticeship Levels?</div>
+    <div class="guide-card-desc">Understanding Levels 2–7 and what each one gives you.</div>
+  </a>
+  <a href="guides/routes-to-university.html" class="guide-card">
+    <div class="guide-card-num">Resource</div>
+    <div class="guide-card-title">Routes from Apprenticeship to University</div>
+    <div class="guide-card-desc">The different pathways from apprenticeship qualifications to undergraduate and postgraduate study.</div>
+  </a>
+  <a href="guides/phd-funding.html" class="guide-card">
+    <div class="guide-card-num">Resource</div>
+    <div class="guide-card-title">How PhD Funding Works</div>
+    <div class="guide-card-desc">The practical guide to who pays for a PhD, what a stipend is, and why you won't be in debt.</div>
+  </a>
+  <a href="guides/professional-registration.html" class="guide-card">
+    <div class="guide-card-num">Resource</div>
+    <div class="guide-card-title">Professional Registration: RSciTech, RSci, and Beyond</div>
+    <div class="guide-card-desc">How to get formal recognition for your scientific competence at every career stage.</div>
+  </a>
+  <a href="guides/jargon-buster.html" class="guide-card">
+    <div class="guide-card-num">Resource</div>
+    <div class="guide-card-title">The Jargon Buster</div>
+    <div class="guide-card-desc">Every confusing academic and scientific term you'll encounter, explained in plain English.</div>
+  </a>
+  <a href="guides/useful-links.html" class="guide-card">
+    <div class="guide-card-num">Resource</div>
+    <div class="guide-card-title">Useful Links and Organisations</div>
+    <div class="guide-card-desc">A curated directory of the most helpful websites, funding bodies, and support services.</div>
+  </a>
+  <a href="guides/student-finance.html" class="guide-card">
+    <div class="guide-card-num">Guide 16</div>
+    <div class="guide-card-title">Paying for It: Student Finance for Non-Standard Applicants</div>
+    <div class="guide-card-desc">The funding rules when you already have qualifications, you're over 25, or you're doing a second degree.</div>
+  </a>
+</div>
+<div class="guides-category">
+  <div class="guides-category-label">Applying</div>
+  <a href="guides/writing-your-application.html" class="guide-card">
+    <div class="guide-card-num">Guide 1</div>
+    <div class="guide-card-title">Your Route Is Different. Your Application Should Be Too.</div>
+    <div class="guide-card-desc">A step-by-step guide to writing personal statements, CVs, and cover letters when you didn't take the standard path.</div>
+  </a>
+  <a href="guides/finding-a-supervisor.html" class="guide-card">
+    <div class="guide-card-num">Guide 2</div>
+    <div class="guide-card-title">Finding Your Supervisor: The Unwritten Rules</div>
+    <div class="guide-card-desc">How to find the right academic, what to say when you email them, and what to do when they don't reply.</div>
+  </a>
+  <a href="guides/finding-a-phd.html" class="guide-card">
+    <div class="guide-card-num">Guide 7</div>
+    <div class="guide-card-title">How to Actually Find a PhD</div>
+    <div class="guide-card-desc">The practical, sit-at-your-laptop guide to searching for funded PhD opportunities in UK science.</div>
+  </a>
+  <a href="guides/employer-conversation.html" class="guide-card">
+    <div class="guide-card-num">Guide 11</div>
+    <div class="guide-card-title">Telling Your Employer You Want More</div>
+    <div class="guide-card-desc">How to talk to your manager about further study — whether you want their support or just their blessing.</div>
+  </a>
+  <a href="guides/phd-interview.html" class="guide-card">
+    <div class="guide-card-num">Guide 12</div>
+    <div class="guide-card-title">The PhD Interview</div>
+    <div class="guide-card-desc">What to expect, what they're looking for, and how to show them who you are — even when you're terrified.</div>
+  </a>
+</div>
+<div class="guides-category">
+  <div class="guides-category-label">Understanding a PhD</div>
+  <a href="guides/what-phd-is-like.html" class="guide-card">
+    <div class="guide-card-num">Guide 5</div>
+    <div class="guide-card-title">What Does a PhD Actually Involve?</div>
+    <div class="guide-card-desc">The honest, practical guide to what your days, weeks, and years will look like.</div>
+  </a>
+</div>
+<div class="guides-category">
+  <div class="guides-category-label">University Life</div>
+  <a href="guides/hidden-curriculum.html" class="guide-card">
+    <div class="guide-card-num">Guide 3</div>
+    <div class="guide-card-title">The Hidden Curriculum</div>
+    <div class="guide-card-desc">Everything you need to know about how university actually works — the stuff they assume you already know.</div>
+  </a>
+  <a href="guides/imposter-syndrome.html" class="guide-card">
+    <div class="guide-card-num">Guide 4</div>
+    <div class="guide-card-title">You Belong Here</div>
+    <div class="guide-card-desc">Why imposter syndrome hits harder when you didn't take the "normal" route — and what to do about it.</div>
+  </a>
+</div>
+<div class="guides-category">
+  <div class="guides-category-label">What Comes Next</div>
+  <a href="guides/life-after-phd.html" class="guide-card">
+    <div class="guide-card-num">Guide 13</div>
+    <div class="guide-card-title">What Comes After?</div>
+    <div class="guide-card-desc">A PhD opens more doors than you think. Here's an honest map of where it can take you.</div>
+  </a>
+  <a href="guides/career-without-phd.html" class="guide-card">
+    <div class="guide-card-num">Guide 14</div>
+    <div class="guide-card-title">The Other Route — Advancing Without a Doctorate</div>
+    <div class="guide-card-desc">A PhD isn't the only way to build a serious career in science. Here's what the alternatives look like.</div>
+  </a>
+</div>
+<div class="guides-category">
+  <div class="guides-category-label">For Supporters</div>
+  <a href="guides/parents-advisors.html" class="guide-card">
+    <div class="guide-card-num">Guide 17</div>
+    <div class="guide-card-title">A Guide for Parents, Teachers, and Careers Advisors</div>
+    <div class="guide-card-desc">Supporting a science apprentice — understanding their options and championing their journey.</div>
+  </a>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <img src="./logo.png" alt="ARC logo" class="footer-logo-img">
+            <div class="footer-tagline">Not the Backup Plan.</div>
+            <div class="footer-links">
+                <a href="./">Home</a>
+                <a href="./guides.html">All Guides</a>
+                <a href="./#join">Get Involved</a>
+            </div>
+            <p>&copy; 2025 ARC — Apprentices into Research Careers</p>
+        </div>
+    </footer>
+</body>
+</html>

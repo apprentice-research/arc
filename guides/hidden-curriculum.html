@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hidden Curriculum — ARC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+
+:root {
+    --amber: #E8913A;
+    --amber-light: #F4C27F;
+    --amber-glow: #FFF3E0;
+    --teal: #1A6B5A;
+    --teal-deep: #0E4D3F;
+    --teal-light: #E8F5F1;
+    --cream: #FFFBF5;
+    --cream-mid: #FFF7ED;
+    --charcoal: #2D2A26;
+    --warm-gray: #6B6560;
+    --warm-gray-light: #A39E98;
+    --coral: #E85D4A;
+    --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    color: var(--charcoal);
+    background: var(--cream);
+    line-height: 1.7;
+    font-weight: 400;
+    overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255, 251, 245, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 20px rgba(45, 42, 38, 0.06);
+    transition: all 0.3s;
+}
+
+.nav-logo {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none; color: var(--charcoal);
+}
+
+.nav-logo-img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+}
+
+.nav-links {
+    display: flex; gap: 1.8rem; list-style: none; align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none; color: var(--warm-gray);
+    font-size: 0.88rem; font-weight: 500; transition: color 0.3s;
+    letter-spacing: 0.02em;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--teal); }
+
+.nav-cta {
+    background: var(--teal) !important; color: white !important;
+    padding: 0.5rem 1.3rem; border-radius: 100px;
+    font-weight: 600 !important; transition: all 0.3s;
+}
+
+.nav-cta:hover {
+    background: var(--teal-deep) !important;
+    transform: translateY(-1px);
+}
+
+.mobile-toggle {
+    display: none; background: none; border: none; cursor: pointer; padding: 0.5rem;
+}
+.mobile-toggle span {
+    display: block; width: 22px; height: 2px; background: var(--charcoal);
+    margin: 5px 0; transition: all 0.3s; border-radius: 2px;
+}
+
+/* ===== GUIDE PAGE ===== */
+.guide-header {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.guide-header::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header::after {
+    content: '';
+    position: absolute; bottom: -30%; left: -15%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26, 107, 90, 0.05) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header-inner {
+    max-width: 720px; margin: 0 auto; position: relative; z-index: 1;
+}
+
+.guide-breadcrumb {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.82rem; color: var(--warm-gray-light);
+    margin-bottom: 1.5rem; text-decoration: none;
+    transition: color 0.3s;
+}
+
+.guide-breadcrumb:hover { color: var(--teal); }
+
+.guide-breadcrumb svg { width: 14px; height: 14px; }
+
+.guide-number {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--teal-light); color: var(--teal);
+    padding: 0.35rem 1rem; border-radius: 100px;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+}
+
+.guide-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.15; color: var(--charcoal);
+    margin-bottom: 0.8rem; font-weight: 400;
+}
+
+.guide-subtitle {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto; line-height: 1.7;
+}
+
+/* ===== GUIDE CONTENT ===== */
+.guide-body {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 2rem 5rem;
+}
+
+.guide-body h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; color: var(--charcoal);
+    margin: 3rem 0 1rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+    margin: 2rem 0 0.8rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body p {
+    color: var(--warm-gray);
+    font-size: 1.02rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.85;
+}
+
+.guide-body p:first-child {
+    font-size: 1.1rem;
+    color: var(--charcoal);
+}
+
+.guide-body strong {
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+.guide-body em {
+    font-style: italic;
+}
+
+.guide-body blockquote,
+.guide-body .callout {
+    margin: 2rem 0;
+    padding: 1.5rem 1.5rem 1.5rem 2rem;
+    border-left: 3px solid var(--amber);
+    background: var(--amber-glow);
+    border-radius: 0 12px 12px 0;
+    font-size: 0.98rem;
+    color: var(--charcoal);
+    line-height: 1.7;
+}
+
+.guide-body a {
+    color: var(--teal);
+    text-decoration: underline;
+    text-decoration-color: rgba(26, 107, 90, 0.3);
+    text-underline-offset: 3px;
+    transition: all 0.2s;
+}
+
+.guide-body a:hover {
+    text-decoration-color: var(--teal);
+}
+
+/* ===== GUIDE NAV (prev/next) ===== */
+.guide-nav {
+    max-width: 700px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+    display: flex; justify-content: space-between; gap: 1rem;
+    border-top: 1px solid rgba(45, 42, 38, 0.08);
+    padding-top: 2rem;
+}
+
+.guide-nav a {
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.08);
+    transition: all 0.3s;
+    max-width: 48%;
+    display: flex; flex-direction: column; gap: 0.3rem;
+}
+
+.guide-nav a:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(45, 42, 38, 0.06);
+}
+
+.guide-nav-label {
+    font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--warm-gray-light);
+    font-weight: 600;
+}
+
+.guide-nav-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem; color: var(--charcoal); line-height: 1.3;
+}
+
+.guide-nav a.next { text-align: right; margin-left: auto; }
+
+/* ===== GUIDES INDEX ===== */
+.guides-hero {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+}
+
+.guides-hero::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guides-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: var(--charcoal); margin-bottom: 1rem;
+    font-weight: 400; position: relative; z-index: 1;
+}
+
+.guides-hero p {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto;
+    line-height: 1.7; position: relative; z-index: 1;
+}
+
+.guides-section {
+    max-width: 900px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+}
+
+.guides-category {
+    margin-bottom: 3rem;
+}
+
+.guides-category-label {
+    font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--amber); margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(45, 42, 38, 0.06);
+}
+
+.guide-card {
+    display: block; text-decoration: none;
+    padding: 1.3rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.06);
+    margin-bottom: 0.75rem;
+    transition: all 0.3s;
+}
+
+.guide-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(45, 42, 38, 0.06);
+}
+
+.guide-card-num {
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--teal); margin-bottom: 0.25rem;
+}
+
+.guide-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--charcoal);
+    margin-bottom: 0.3rem; line-height: 1.3;
+}
+
+.guide-card-desc {
+    font-size: 0.88rem; color: var(--warm-gray); line-height: 1.5;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background: var(--teal-deep);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.site-footer a {
+    color: var(--amber-light);
+    text-decoration: none;
+}
+
+.site-footer a:hover { text-decoration: underline; }
+
+.footer-inner {
+    max-width: 600px; margin: 0 auto;
+}
+
+.footer-logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+    color: var(--amber-light);
+    font-size: 0.9rem; margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.footer-links {
+    display: flex; gap: 1.5rem; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-toggle { display: block; }
+    nav.open .nav-links {
+        display: flex; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(255, 251, 245, 0.98);
+        backdrop-filter: blur(12px);
+        padding: 1rem 2rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(45, 42, 38, 0.08);
+    }
+    .guide-nav { flex-direction: column; }
+    .guide-nav a { max-width: 100%; }
+    .guide-nav a.next { text-align: left; }
+}
+
+@media (max-width: 480px) {
+    .guide-header { padding: 7rem 1.2rem 2rem; }
+    .guide-body { padding: 1.5rem 1.2rem 4rem; }
+    .guide-body h2 { font-size: 1.4rem; }
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="nav-logo">
+            <img src="../logo.png" alt="ARC logo" class="nav-logo-img">
+            <span class="nav-logo-text">ARC</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../index.html" >Home</a></li>
+            <li><a href="../guides.html" class='active'>Guides</a></li>
+            <li><a href="../index.html#join" class="nav-cta">Get Involved</a></li>
+        </ul>
+        <button class="mobile-toggle" onclick="this.closest('nav').classList.toggle('open')" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="guide-header">
+        <div class="guide-header-inner">
+            <a href="../guides.html" class="guide-breadcrumb">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                All Guides
+            </a>
+            <div class="guide-number">Guide 3</div>
+            <h1>The Hidden Curriculum</h1>
+            <p class="guide-subtitle">Everything you need to know about how university actually works — the stuff they assume you already know.</p>
+        </div>
+    </div>
+
+    <div class="guide-body">
+        <h2>What Is the "Hidden Curriculum"?</h2>
+<p>Every university has two curricula. There's the official one — the modules, the reading lists, the assessment criteria — and then there's the hidden one. The hidden curriculum is all the unwritten rules, expectations, and norms that nobody explicitly teaches you, but everyone seems to know. Things like how to write an academic essay, what's expected in a seminar, how to talk to lecturers, and what "reading week" actually means.
+</p>
+<p>If you've been through the traditional school-to-university pipeline, you absorb a lot of this by osmosis. If you haven't, it can feel like everyone else got a manual that you didn't. This guide is that manual.
+</p>
+<h2>Academic Writing</h2>
+<p>Academic writing is different from professional writing, and it's different from school writing too. It takes practice, and the first time you hand in an essay you'll probably feel like you're doing it wrong. That's normal. Here's what you need to know.
+</p>
+<p><strong>Structure matters.</strong> An academic essay or report has a clear argument that progresses logically. Introduction (what you're going to argue and why), main body (the evidence and reasoning), conclusion (what you've shown). Every paragraph should make one main point and connect to the ones around it.
+</p>
+<p><strong>You need to reference everything.</strong> In professional work, you might say "research shows that X." In academic writing, you need to say exactly which research, by whom, published where and when. This is called referencing, and your university will have a preferred system (Harvard, APA, Vancouver, etc.). Learn it early. It feels tedious but it's non-negotiable.
+</p>
+<p><strong>Critical analysis isn't criticism.</strong> When lecturers ask you to "critically analyse" something, they don't mean find fault with it. They mean examine it carefully: what are the strengths and limitations? What assumptions does it make? How does it relate to other evidence? This is actually something apprentices are often good at — you're used to evaluating whether something works in practice.
+</p>
+<p><strong>Your university has a writing support service.</strong> Use it. It's not a sign of weakness; it's a resource that exists because the transition is hard for everyone, and it's staffed by people who are good at helping you find your voice.
+</p>
+<h2>Lectures, Seminars, and Tutorials</h2>
+<p><strong>Lectures</strong> are one-to-many: a lecturer presents material to a large group. Your job is to listen, take notes, and engage with the material afterwards. You're not expected to speak in lectures (though some lecturers invite questions). The slides will usually be available online afterwards, but your own notes are more valuable — the act of writing helps you process the information.
+</p>
+<p><strong>Seminars</strong> are smaller group discussions, usually about pre-assigned reading or a topic from the lecture series. You are expected to have prepared. You are expected to contribute. This can be daunting if you're not used to academic discussion, but remember: you don't have to have all the answers. Asking a thoughtful question is just as valuable as making a statement.
+</p>
+<p><strong>Tutorials</strong> (common at some universities) are even smaller — sometimes one-to-one or one-to-three with a tutor. These are opportunities for deeper discussion and feedback. Come prepared with questions.
+</p>
+<p><strong>The biggest adjustment:</strong> In your apprenticeship, you probably had clear daily tasks and someone managing your workload. At university, nobody chases you. If you don't do the reading, nobody calls you into a meeting. The deadlines are spaced out, and the expectation is that you manage your own time. This freedom is wonderful and dangerous in equal measure. Build a schedule early.
+</p>
+<h2>Asking for Help</h2>
+<p>In a workplace, asking your manager a question is normal. At university, for some reason, many students feel like asking for help is admitting failure. It's not. Lecturers have office hours specifically for this purpose. Personal tutors exist to support you. Student services exist to help with everything from mental health to financial hardship.
+</p>
+<p>The trick is knowing who to go to. Academic questions go to your module lecturer or personal tutor. Procedural questions (deadlines, extenuating circumstances, module changes) go to the departmental office or student services. Wellbeing questions go to your university's counselling or mental health service.
+</p>
+<p>If you're not sure, start with your personal tutor. That's what they're there for.
+</p>
+<h2>The Social Side</h2>
+<p>University social life can feel alienating if you're a mature student, a part-time student, or someone who doesn't fit the "freshers' week" demographic. You might be older than your classmates. You might have a mortgage, or children, or a full-time job alongside your studies. You might feel like you don't belong in the student union.
+</p>
+<p>All of this is valid, and you're not the only one feeling it. Most universities have mature student societies and support groups. Postgraduate communities tend to be more age-diverse than undergraduate ones. And the friends you make at university don't have to be people you go drinking with — they can be the person you study with, the lab partner you trust, the classmate who sends you notes when you miss a lecture.
+</p>
+<p>You don't have to recreate a "traditional" university experience. You just have to find the version that works for you.
+</p>
+<h2>Finances</h2>
+<p>If you're coming from a paid apprenticeship to full-time study, the financial shift can be significant. A few things worth knowing:
+</p>
+<p><strong>Student loans are income-contingent.</strong> You only repay when you earn above the threshold (currently £25,000 for Plan 5 loans). Many people never fully repay, and unpaid balances are written off after 40 years. It's more like a graduate tax than a traditional debt.
+</p>
+<p><strong>If you're doing a PhD, you're funded.</strong> Most science PhDs come with a stipend (see our PhD Funding guide). You won't be paying tuition fees and you'll receive a tax-free living allowance.
+</p>
+<p><strong>Hardship funds exist.</strong> Most universities have discretionary funds for students in financial difficulty. If you're struggling, ask student services. These funds are underused because people don't know about them.
+</p>
+<p><strong>Budgeting is a skill.</strong> If you've been earning and are now on a student income, the adjustment is real. There are free budgeting tools and advisors at most universities — use them before you need to, not after.
+</p>
+    </div>
+
+    <div class="guide-nav">
+        <a href="finding-a-supervisor.html" class="prev">
+            <span class="guide-nav-label">← Previous</span>
+            <span class="guide-nav-title">Finding Your Supervisor: The Unwritten Rules</span>
+        </a>
+        <a href="imposter-syndrome.html" class="next">
+            <span class="guide-nav-label">Next →</span>
+            <span class="guide-nav-title">You Belong Here</span>
+        </a>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <img src="../logo.png" alt="ARC logo" class="footer-logo-img">
+            <div class="footer-tagline">Not the Backup Plan.</div>
+            <div class="footer-links">
+                <a href="../">Home</a>
+                <a href="../guides.html">All Guides</a>
+                <a href="../#join">Get Involved</a>
+            </div>
+            <p>&copy; 2025 ARC — Apprentices into Research Careers</p>
+        </div>
+    </footer>
+</body>
+</html>

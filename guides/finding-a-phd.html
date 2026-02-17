@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Actually Find a PhD — ARC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+
+:root {
+    --amber: #E8913A;
+    --amber-light: #F4C27F;
+    --amber-glow: #FFF3E0;
+    --teal: #1A6B5A;
+    --teal-deep: #0E4D3F;
+    --teal-light: #E8F5F1;
+    --cream: #FFFBF5;
+    --cream-mid: #FFF7ED;
+    --charcoal: #2D2A26;
+    --warm-gray: #6B6560;
+    --warm-gray-light: #A39E98;
+    --coral: #E85D4A;
+    --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    color: var(--charcoal);
+    background: var(--cream);
+    line-height: 1.7;
+    font-weight: 400;
+    overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255, 251, 245, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 20px rgba(45, 42, 38, 0.06);
+    transition: all 0.3s;
+}
+
+.nav-logo {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none; color: var(--charcoal);
+}
+
+.nav-logo-img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+}
+
+.nav-links {
+    display: flex; gap: 1.8rem; list-style: none; align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none; color: var(--warm-gray);
+    font-size: 0.88rem; font-weight: 500; transition: color 0.3s;
+    letter-spacing: 0.02em;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--teal); }
+
+.nav-cta {
+    background: var(--teal) !important; color: white !important;
+    padding: 0.5rem 1.3rem; border-radius: 100px;
+    font-weight: 600 !important; transition: all 0.3s;
+}
+
+.nav-cta:hover {
+    background: var(--teal-deep) !important;
+    transform: translateY(-1px);
+}
+
+.mobile-toggle {
+    display: none; background: none; border: none; cursor: pointer; padding: 0.5rem;
+}
+.mobile-toggle span {
+    display: block; width: 22px; height: 2px; background: var(--charcoal);
+    margin: 5px 0; transition: all 0.3s; border-radius: 2px;
+}
+
+/* ===== GUIDE PAGE ===== */
+.guide-header {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.guide-header::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header::after {
+    content: '';
+    position: absolute; bottom: -30%; left: -15%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26, 107, 90, 0.05) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header-inner {
+    max-width: 720px; margin: 0 auto; position: relative; z-index: 1;
+}
+
+.guide-breadcrumb {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.82rem; color: var(--warm-gray-light);
+    margin-bottom: 1.5rem; text-decoration: none;
+    transition: color 0.3s;
+}
+
+.guide-breadcrumb:hover { color: var(--teal); }
+
+.guide-breadcrumb svg { width: 14px; height: 14px; }
+
+.guide-number {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--teal-light); color: var(--teal);
+    padding: 0.35rem 1rem; border-radius: 100px;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+}
+
+.guide-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.15; color: var(--charcoal);
+    margin-bottom: 0.8rem; font-weight: 400;
+}
+
+.guide-subtitle {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto; line-height: 1.7;
+}
+
+/* ===== GUIDE CONTENT ===== */
+.guide-body {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 2rem 5rem;
+}
+
+.guide-body h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; color: var(--charcoal);
+    margin: 3rem 0 1rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+    margin: 2rem 0 0.8rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body p {
+    color: var(--warm-gray);
+    font-size: 1.02rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.85;
+}
+
+.guide-body p:first-child {
+    font-size: 1.1rem;
+    color: var(--charcoal);
+}
+
+.guide-body strong {
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+.guide-body em {
+    font-style: italic;
+}
+
+.guide-body blockquote,
+.guide-body .callout {
+    margin: 2rem 0;
+    padding: 1.5rem 1.5rem 1.5rem 2rem;
+    border-left: 3px solid var(--amber);
+    background: var(--amber-glow);
+    border-radius: 0 12px 12px 0;
+    font-size: 0.98rem;
+    color: var(--charcoal);
+    line-height: 1.7;
+}
+
+.guide-body a {
+    color: var(--teal);
+    text-decoration: underline;
+    text-decoration-color: rgba(26, 107, 90, 0.3);
+    text-underline-offset: 3px;
+    transition: all 0.2s;
+}
+
+.guide-body a:hover {
+    text-decoration-color: var(--teal);
+}
+
+/* ===== GUIDE NAV (prev/next) ===== */
+.guide-nav {
+    max-width: 700px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+    display: flex; justify-content: space-between; gap: 1rem;
+    border-top: 1px solid rgba(45, 42, 38, 0.08);
+    padding-top: 2rem;
+}
+
+.guide-nav a {
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.08);
+    transition: all 0.3s;
+    max-width: 48%;
+    display: flex; flex-direction: column; gap: 0.3rem;
+}
+
+.guide-nav a:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(45, 42, 38, 0.06);
+}
+
+.guide-nav-label {
+    font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--warm-gray-light);
+    font-weight: 600;
+}
+
+.guide-nav-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem; color: var(--charcoal); line-height: 1.3;
+}
+
+.guide-nav a.next { text-align: right; margin-left: auto; }
+
+/* ===== GUIDES INDEX ===== */
+.guides-hero {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+}
+
+.guides-hero::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guides-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: var(--charcoal); margin-bottom: 1rem;
+    font-weight: 400; position: relative; z-index: 1;
+}
+
+.guides-hero p {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto;
+    line-height: 1.7; position: relative; z-index: 1;
+}
+
+.guides-section {
+    max-width: 900px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+}
+
+.guides-category {
+    margin-bottom: 3rem;
+}
+
+.guides-category-label {
+    font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--amber); margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(45, 42, 38, 0.06);
+}
+
+.guide-card {
+    display: block; text-decoration: none;
+    padding: 1.3rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.06);
+    margin-bottom: 0.75rem;
+    transition: all 0.3s;
+}
+
+.guide-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(45, 42, 38, 0.06);
+}
+
+.guide-card-num {
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--teal); margin-bottom: 0.25rem;
+}
+
+.guide-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--charcoal);
+    margin-bottom: 0.3rem; line-height: 1.3;
+}
+
+.guide-card-desc {
+    font-size: 0.88rem; color: var(--warm-gray); line-height: 1.5;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background: var(--teal-deep);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.site-footer a {
+    color: var(--amber-light);
+    text-decoration: none;
+}
+
+.site-footer a:hover { text-decoration: underline; }
+
+.footer-inner {
+    max-width: 600px; margin: 0 auto;
+}
+
+.footer-logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+    color: var(--amber-light);
+    font-size: 0.9rem; margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.footer-links {
+    display: flex; gap: 1.5rem; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-toggle { display: block; }
+    nav.open .nav-links {
+        display: flex; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(255, 251, 245, 0.98);
+        backdrop-filter: blur(12px);
+        padding: 1rem 2rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(45, 42, 38, 0.08);
+    }
+    .guide-nav { flex-direction: column; }
+    .guide-nav a { max-width: 100%; }
+    .guide-nav a.next { text-align: left; }
+}
+
+@media (max-width: 480px) {
+    .guide-header { padding: 7rem 1.2rem 2rem; }
+    .guide-body { padding: 1.5rem 1.2rem 4rem; }
+    .guide-body h2 { font-size: 1.4rem; }
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="nav-logo">
+            <img src="../logo.png" alt="ARC logo" class="nav-logo-img">
+            <span class="nav-logo-text">ARC</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../index.html" >Home</a></li>
+            <li><a href="../guides.html" class='active'>Guides</a></li>
+            <li><a href="../index.html#join" class="nav-cta">Get Involved</a></li>
+        </ul>
+        <button class="mobile-toggle" onclick="this.closest('nav').classList.toggle('open')" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="guide-header">
+        <div class="guide-header-inner">
+            <a href="../guides.html" class="guide-breadcrumb">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                All Guides
+            </a>
+            <div class="guide-number">Guide 7</div>
+            <h1>How to Actually Find a PhD</h1>
+            <p class="guide-subtitle">The practical, sit-at-your-laptop guide to searching for funded PhD opportunities in UK science.</p>
+        </div>
+    </div>
+
+    <div class="guide-body">
+        <h2>Why This Guide Exists</h2>
+<p>"Just look on FindAPhD" is advice you'll hear a lot. It's not wrong, but it's a bit like telling someone who's never cooked to "just follow a recipe." Technically true. Practically useless without context.
+</p>
+<p>This guide walks you through the entire search process — where to look, what to look for, how to decode the jargon in job-ad-style listings, and how to tell a good opportunity from a mediocre one.
+</p>
+<h2>Step 1: Know What You're Looking For (Roughly)</h2>
+<p>You don't need a perfect research question. But you do need a direction. Before you start searching, write down your answers to three things:
+</p>
+<p>What broad area of science interests me? (e.g., cell biology, environmental science, pharmaceutical chemistry, biomedical engineering)
+</p>
+<p>What kind of work do I enjoy? (e.g., lab-based wet science, computational analysis, clinical research, fieldwork)
+</p>
+<p>Are there geographic constraints? (e.g., do I need to stay near a specific city, or am I flexible?)
+</p>
+<p>These answers become your search filters. They'll save you hours of scrolling through irrelevant listings.
+</p>
+<h2>Step 2: Where to Search</h2>
+<p>There are four main places to find funded PhD opportunities in UK science:
+</p>
+<p><strong>FindAPhD.com</strong> — This is the biggest listing site. You can filter by subject, location, funding status, and start date. Most funded studentships in the UK end up here. Set up email alerts for your area so new opportunities come to you.
+</p>
+<p><strong>jobs.ac.uk</strong> — The main academic jobs board. It lists PhD studentships alongside postdoc and lecturer positions. The listings tend to be slightly more formal and often come from larger research programmes.
+</p>
+<p><strong>University department websites</strong> — Many departments advertise PhD studentships on their own pages, sometimes before they appear on aggregator sites. If you have specific universities in mind, check their postgraduate research pages directly. Look especially at pages for Doctoral Training Partnerships (DTPs) and Centres for Doctoral Training (CDTs), as these often have their own application portals.
+</p>
+<p><strong>Directly from academics</strong> — Not all PhD projects are formally advertised. Some supervisors have funding and are looking for the right student. This is where emailing potential supervisors (see our guide on that) can open doors that don't appear in any search engine.
+</p>
+<h2>Step 3: How to Read a PhD Listing</h2>
+<p>PhD advertisements can be confusing the first time you encounter them. Here's how to decode the key parts:
+</p>
+<p><strong>The project title and description.</strong> This tells you what you'd be working on. It might be very specific ("Investigating the role of FOXP3 in regulatory T-cell dysfunction in inflammatory bowel disease") or more open ("A funded studentship in computational neuroscience — project to be agreed with the successful candidate"). Specific projects mean the research question is already defined. Open projects give you more input into shaping the work.
+</p>
+<p><strong>The supervisor(s).</strong> The listing will name one or more supervisors. Look them up. Read their recent papers. Check their research group website. This person will be your mentor for three to four years — make sure their work genuinely interests you.
+</p>
+<p><strong>Funding status.</strong> This is critical. Look for phrases like:
+</p>
+<p>"Fully funded studentship" — This means tuition fees and a stipend are covered. This is what you want.
+</p>
+<p>"Fees only" or "partial funding" — This means you'd receive tuition fee coverage but no living stipend, or only partial coverage. You'd need to find additional funding for living costs. Proceed with caution.
+</p>
+<p>"Self-funded students may also apply" — This means the project exists but there's no guaranteed funding. You'd need to bring your own money. Unless you have independent funding, this is generally not a viable option.
+</p>
+<p>"Competition funded" — This means the project is entered into a competition with other projects, and funding goes to the project with the best candidate. Your application needs to be strong enough that the panel chooses to fund your project over others.
+</p>
+<p><strong>Eligibility.</strong> Check whether the studentship is open to UK students, EU students, international students, or all. Most UKRI-funded studentships are open to UK residents (and up to 30% international students). Some charity-funded positions have different eligibility rules.
+</p>
+<p><strong>Entry requirements.</strong> Most will ask for a 2:1 (upper second-class honours degree) or equivalent. If you have a degree from a degree apprenticeship, this applies directly. If you have a different qualification level, the listing may say "or equivalent qualifications and experience" — this is your door. Contact the supervisor or admissions team to discuss your specific background.
+</p>
+<p><strong>Start date and deadline.</strong> Most funded PhD positions for an October start have application deadlines between December and March. Don't miss these. Set calendar reminders.
+</p>
+<h2>Step 4: Evaluate the Opportunity</h2>
+<p>Not all PhD positions are created equal. Here are the things worth investigating before you apply:
+</p>
+<p><strong>The supervisor's track record.</strong> Do their current and former PhD students publish papers? Do they finish on time? Do they go on to good careers? You can find this out by looking at the research group's alumni page or by asking to speak with a current student.
+</p>
+<p><strong>The research environment.</strong> Is this a large, well-resourced research group with regular meetings and a collaborative culture? Or would you be the only PhD student in a small lab with limited peer support? Both can work, but they feel very different.
+</p>
+<p><strong>The training provision.</strong> What additional training is offered? DTPs and CDTs usually provide structured skills training, cohort activities, and conference funding. Standalone studentships might offer less formal training — which is fine if the supervisor and department make up for it.
+</p>
+<p><strong>The stipend.</strong> The minimum UKRI stipend for 2025–26 is £20,780 (£22,780 in London). Some studentships offer enhanced stipends, especially industry-partnered CASE studentships. Check what's offered and whether it's liveable for the location.
+</p>
+<p><strong>The location.</strong> Where would you live? What's the cost of living? Is the university somewhere you could see yourself for three to four years? These practical questions matter more than people admit.
+</p>
+<h2>Step 5: Apply</h2>
+<p>Once you've found something that excites you, the application process typically involves submitting a CV, a personal statement (see our guide on that), academic transcripts, and the names of two referees. Some programmes also ask for a research proposal, especially if the project is self-defined.
+</p>
+<p>For DTP and CDT applications, there may be an interview stage — usually a presentation of your background and interests followed by questions from a panel.
+</p>
+<p>See our separate guides on writing your application and finding a supervisor for detailed advice on these stages.
+</p>
+<h2>A Note on Timing</h2>
+<p>The PhD recruitment cycle runs roughly like this:
+</p>
+<p><strong>September – November:</strong> Studentships start appearing on FindAPhD and university websites. This is a good time to research supervisors and start making contact.
+</p>
+<p><strong>November – February:</strong> The main application window. Most UKRI-funded deadlines fall in this period.
+</p>
+<p><strong>February – April:</strong> Interviews and offers.
+</p>
+<p><strong>October:</strong> Start date for most UK PhDs.
+</p>
+<p>If you're finishing an apprenticeship in the summer, that means you should ideally be looking and making contact from around September the year before you want to start. It's not too late to apply after January, but many of the best-funded positions will have closed.
+</p>
+    </div>
+
+    <div class="guide-nav">
+        <a href="self-assessment.html" class="prev">
+            <span class="guide-nav-label">← Previous</span>
+            <span class="guide-nav-title">Before You Apply: An Honest Self-Assessment</span>
+        </a>
+        <a href="reading-papers.html" class="next">
+            <span class="guide-nav-label">Next →</span>
+            <span class="guide-nav-title">How to Read a Scientific Paper</span>
+        </a>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <img src="../logo.png" alt="ARC logo" class="footer-logo-img">
+            <div class="footer-tagline">Not the Backup Plan.</div>
+            <div class="footer-links">
+                <a href="../">Home</a>
+                <a href="../guides.html">All Guides</a>
+                <a href="../#join">Get Involved</a>
+            </div>
+            <p>&copy; 2025 ARC — Apprentices into Research Careers</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Your Network from Scratch — ARC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+
+:root {
+    --amber: #E8913A;
+    --amber-light: #F4C27F;
+    --amber-glow: #FFF3E0;
+    --teal: #1A6B5A;
+    --teal-deep: #0E4D3F;
+    --teal-light: #E8F5F1;
+    --cream: #FFFBF5;
+    --cream-mid: #FFF7ED;
+    --charcoal: #2D2A26;
+    --warm-gray: #6B6560;
+    --warm-gray-light: #A39E98;
+    --coral: #E85D4A;
+    --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    color: var(--charcoal);
+    background: var(--cream);
+    line-height: 1.7;
+    font-weight: 400;
+    overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255, 251, 245, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 20px rgba(45, 42, 38, 0.06);
+    transition: all 0.3s;
+}
+
+.nav-logo {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none; color: var(--charcoal);
+}
+
+.nav-logo-img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+}
+
+.nav-links {
+    display: flex; gap: 1.8rem; list-style: none; align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none; color: var(--warm-gray);
+    font-size: 0.88rem; font-weight: 500; transition: color 0.3s;
+    letter-spacing: 0.02em;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--teal); }
+
+.nav-cta {
+    background: var(--teal) !important; color: white !important;
+    padding: 0.5rem 1.3rem; border-radius: 100px;
+    font-weight: 600 !important; transition: all 0.3s;
+}
+
+.nav-cta:hover {
+    background: var(--teal-deep) !important;
+    transform: translateY(-1px);
+}
+
+.mobile-toggle {
+    display: none; background: none; border: none; cursor: pointer; padding: 0.5rem;
+}
+.mobile-toggle span {
+    display: block; width: 22px; height: 2px; background: var(--charcoal);
+    margin: 5px 0; transition: all 0.3s; border-radius: 2px;
+}
+
+/* ===== GUIDE PAGE ===== */
+.guide-header {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.guide-header::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header::after {
+    content: '';
+    position: absolute; bottom: -30%; left: -15%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26, 107, 90, 0.05) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header-inner {
+    max-width: 720px; margin: 0 auto; position: relative; z-index: 1;
+}
+
+.guide-breadcrumb {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.82rem; color: var(--warm-gray-light);
+    margin-bottom: 1.5rem; text-decoration: none;
+    transition: color 0.3s;
+}
+
+.guide-breadcrumb:hover { color: var(--teal); }
+
+.guide-breadcrumb svg { width: 14px; height: 14px; }
+
+.guide-number {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--teal-light); color: var(--teal);
+    padding: 0.35rem 1rem; border-radius: 100px;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+}
+
+.guide-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.15; color: var(--charcoal);
+    margin-bottom: 0.8rem; font-weight: 400;
+}
+
+.guide-subtitle {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto; line-height: 1.7;
+}
+
+/* ===== GUIDE CONTENT ===== */
+.guide-body {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 2rem 5rem;
+}
+
+.guide-body h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; color: var(--charcoal);
+    margin: 3rem 0 1rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+    margin: 2rem 0 0.8rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body p {
+    color: var(--warm-gray);
+    font-size: 1.02rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.85;
+}
+
+.guide-body p:first-child {
+    font-size: 1.1rem;
+    color: var(--charcoal);
+}
+
+.guide-body strong {
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+.guide-body em {
+    font-style: italic;
+}
+
+.guide-body blockquote,
+.guide-body .callout {
+    margin: 2rem 0;
+    padding: 1.5rem 1.5rem 1.5rem 2rem;
+    border-left: 3px solid var(--amber);
+    background: var(--amber-glow);
+    border-radius: 0 12px 12px 0;
+    font-size: 0.98rem;
+    color: var(--charcoal);
+    line-height: 1.7;
+}
+
+.guide-body a {
+    color: var(--teal);
+    text-decoration: underline;
+    text-decoration-color: rgba(26, 107, 90, 0.3);
+    text-underline-offset: 3px;
+    transition: all 0.2s;
+}
+
+.guide-body a:hover {
+    text-decoration-color: var(--teal);
+}
+
+/* ===== GUIDE NAV (prev/next) ===== */
+.guide-nav {
+    max-width: 700px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+    display: flex; justify-content: space-between; gap: 1rem;
+    border-top: 1px solid rgba(45, 42, 38, 0.08);
+    padding-top: 2rem;
+}
+
+.guide-nav a {
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.08);
+    transition: all 0.3s;
+    max-width: 48%;
+    display: flex; flex-direction: column; gap: 0.3rem;
+}
+
+.guide-nav a:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(45, 42, 38, 0.06);
+}
+
+.guide-nav-label {
+    font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--warm-gray-light);
+    font-weight: 600;
+}
+
+.guide-nav-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem; color: var(--charcoal); line-height: 1.3;
+}
+
+.guide-nav a.next { text-align: right; margin-left: auto; }
+
+/* ===== GUIDES INDEX ===== */
+.guides-hero {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+}
+
+.guides-hero::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guides-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: var(--charcoal); margin-bottom: 1rem;
+    font-weight: 400; position: relative; z-index: 1;
+}
+
+.guides-hero p {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto;
+    line-height: 1.7; position: relative; z-index: 1;
+}
+
+.guides-section {
+    max-width: 900px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+}
+
+.guides-category {
+    margin-bottom: 3rem;
+}
+
+.guides-category-label {
+    font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--amber); margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(45, 42, 38, 0.06);
+}
+
+.guide-card {
+    display: block; text-decoration: none;
+    padding: 1.3rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.06);
+    margin-bottom: 0.75rem;
+    transition: all 0.3s;
+}
+
+.guide-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(45, 42, 38, 0.06);
+}
+
+.guide-card-num {
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--teal); margin-bottom: 0.25rem;
+}
+
+.guide-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--charcoal);
+    margin-bottom: 0.3rem; line-height: 1.3;
+}
+
+.guide-card-desc {
+    font-size: 0.88rem; color: var(--warm-gray); line-height: 1.5;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background: var(--teal-deep);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.site-footer a {
+    color: var(--amber-light);
+    text-decoration: none;
+}
+
+.site-footer a:hover { text-decoration: underline; }
+
+.footer-inner {
+    max-width: 600px; margin: 0 auto;
+}
+
+.footer-logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+    color: var(--amber-light);
+    font-size: 0.9rem; margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.footer-links {
+    display: flex; gap: 1.5rem; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-toggle { display: block; }
+    nav.open .nav-links {
+        display: flex; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(255, 251, 245, 0.98);
+        backdrop-filter: blur(12px);
+        padding: 1rem 2rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(45, 42, 38, 0.08);
+    }
+    .guide-nav { flex-direction: column; }
+    .guide-nav a { max-width: 100%; }
+    .guide-nav a.next { text-align: left; }
+}
+
+@media (max-width: 480px) {
+    .guide-header { padding: 7rem 1.2rem 2rem; }
+    .guide-body { padding: 1.5rem 1.2rem 4rem; }
+    .guide-body h2 { font-size: 1.4rem; }
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="nav-logo">
+            <img src="../logo.png" alt="ARC logo" class="nav-logo-img">
+            <span class="nav-logo-text">ARC</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../index.html" >Home</a></li>
+            <li><a href="../guides.html" class='active'>Guides</a></li>
+            <li><a href="../index.html#join" class="nav-cta">Get Involved</a></li>
+        </ul>
+        <button class="mobile-toggle" onclick="this.closest('nav').classList.toggle('open')" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="guide-header">
+        <div class="guide-header-inner">
+            <a href="../guides.html" class="guide-breadcrumb">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                All Guides
+            </a>
+            <div class="guide-number">Guide 15</div>
+            <h1>Building Your Network from Scratch</h1>
+            <p class="guide-subtitle">How to make professional connections in science when you're starting from absolutely nobody.</p>
+        </div>
+    </div>
+
+    <div class="guide-body">
+        <h2>Why This Feels So Hard</h2>
+<p>Networking advice usually assumes you already have a network. "Leverage your connections." "Ask your supervisor to introduce you." "Reach out to your alumni network." If you came through an apprenticeship and you're the first person in your family to work in science, these suggestions are useless. You don't have a supervisor with academic connections. You may not have attended a university with an alumni network. Your colleagues from work might not know anyone in the world you're trying to enter.
+</p>
+<p>This guide is for people starting from genuine zero. It's about building a professional network from scratch, one connection at a time, in a way that feels authentic rather than performative.
+</p>
+<h2>Why Networking Matters</h2>
+<p>Let's be direct about this. Networking is not about collecting business cards or adding strangers on LinkedIn. It's about building relationships with people who work in areas that interest you — so that when opportunities arise, you hear about them; when you need advice, you have someone to ask; and when you apply for things, someone can vouch for you.
+</p>
+<p>In science, this matters enormously. Many PhD positions are never formally advertised — they're filled through word of mouth. Conference conversations lead to collaborations. Casual chats with a visiting speaker can turn into a reference letter. The "hidden job market" is real, and the way in is through people.
+</p>
+<p>This doesn't mean you need to become someone you're not. Networking done well is just having genuine conversations with people about work you both care about. You're already capable of that.
+</p>
+<h2>Start Where You Are</h2>
+<p>You have more connections than you think. Start by mapping out who you already know:
+</p>
+<p>Your line manager and senior colleagues at work — they may have university contacts, attend conferences, or know people who've done PhDs.
+</p>
+<p>Your apprenticeship training provider — tutors or lecturers who may still be connected to academia or industry.
+</p>
+<p>Other apprentices you've worked alongside — some of them may have already progressed to further study and can share their experience.
+</p>
+<p>Anyone you've met through professional development, workshops, or training courses.
+</p>
+<p>These people form the seed of your network. You don't need to ask them for anything dramatic. Just let them know you're exploring further study or career development, and ask if they know anyone it would be useful to talk to. Most people are happy to make an introduction.
+</p>
+<h2>Professional Bodies</h2>
+<p>Joining a professional body is one of the fastest ways to build a network in science. Organisations like the Royal Society of Biology, Royal Society of Chemistry, Institute of Physics, Institute of Biomedical Science, and Society of Biology offer membership at early-career rates and provide access to events, conferences, local groups, mentoring schemes, and online communities.
+</p>
+<p>Many of these bodies have specific early-career or apprentice-focused networks. The RSB, for example, runs events specifically for those starting their science careers. Attending even one event gives you an immediate cohort of people at a similar stage — and that peer network is as valuable as senior contacts.
+</p>
+<h2>Conferences and Seminars</h2>
+<p>Scientific conferences can feel intimidating, but they're one of the best places to make connections. Here's how to approach them if you've never been:
+</p>
+<p><strong>Start small.</strong> University departmental seminars are usually free and open. Turn up, listen, and introduce yourself to the speaker or other attendees afterwards. You don't need an excuse — "I'm interested in this area and I'm exploring further study" is enough.
+</p>
+<p><strong>Attend early-career conferences.</strong> Many research communities run events specifically for students and early-career scientists. These are more informal, the other attendees are in a similar position, and the barrier to conversation is much lower.
+</p>
+<p><strong>Prepare one question.</strong> If you've read anything related to the speaker's work, prepare a thoughtful question. Asking a good question in a seminar is one of the most efficient ways to become visible.
+</p>
+<p><strong>Use the coffee breaks.</strong> The real networking at conferences happens between sessions. Stand near the coffee. Make eye contact. Say "Hi, I'm [name], I'm interested in [topic] — what are you working on?" It feels awkward for everyone, not just you.
+</p>
+<p><strong>Follow up.</strong> If you have a good conversation with someone, send a brief email or LinkedIn message within a day or two. "It was great meeting you at [event] — I really enjoyed hearing about [their work]." That's all it takes to convert a conversation into a connection.
+</p>
+<h2>LinkedIn (Yes, Really)</h2>
+<p>LinkedIn is an underused tool for early-career scientists, and it's completely free. Here's how to use it well:
+</p>
+<p><strong>Build a clear profile.</strong> Your headline should say what you are and what you're interested in, not just your job title. "Science Apprentice | Aspiring PhD Student | Interested in [field]" is specific and searchable.
+</p>
+<p><strong>Follow academics and research groups</strong> in your area of interest. Like and comment on their posts. This puts you on their radar without requiring a cold message.
+</p>
+<p><strong>Share things.</strong> If you've read an interesting paper, attended a seminar, or achieved something at work, post about it. Brief, thoughtful posts establish you as someone who's engaged with science. You don't need to be an expert — sharing your learning journey is valuable.
+</p>
+<p><strong>Send connection requests with a note.</strong> When you connect with someone new, include a short message explaining who you are and why you're connecting. "Hi Dr [Name], I'm a science apprentice interested in your work on [topic] — I'd love to follow your research" is much better than a blank request.
+</p>
+<p><strong>Join groups.</strong> LinkedIn has groups for apprentices, early-career researchers, specific scientific disciplines, and widening participation in STEM. These are spaces to ask questions, share experiences, and find peers.
+</p>
+<h2>The STEM Ambassador Programme</h2>
+<p>Becoming a STEM Ambassador is free, involves a simple registration and DBS check, and connects you with a national network of people who care about science education and outreach. You'll attend training sessions, meet other ambassadors (many of whom are researchers, PhD students, and industry scientists), and volunteer to inspire young people.
+</p>
+<p>The networking is a bonus — the primary purpose is public engagement. But the side effect is that you meet scientists from every sector and career stage, in an informal setting where everyone is approachable.
+</p>
+<h2>How to Ask for Help Without Feeling Like a Burden</h2>
+<p>This is the bit nobody talks about. When you don't know anyone, every conversation feels like you're asking for a favour. But here's the thing: most scientists — especially those who've come through non-traditional routes themselves — remember what it was like and are glad to help.
+</p>
+<p>The key is to be specific in what you're asking for, respectful of their time, and genuine in your interest.
+</p>
+<p>"Could I buy you a coffee and ask about your experience applying for PhDs?" is a reasonable request. "Can you get me a job?" is not.
+</p>
+<p>"I'd really value fifteen minutes of your time to ask about [specific topic]" is respectful. "I'd love to pick your brain sometime" is vague and easy to ignore.
+</p>
+<p>And always follow up with a thank-you. A short email saying "Thank you for your time — your advice about [specific thing] was really helpful" closes the loop and leaves a good impression.
+</p>
+<h2>The Long Game</h2>
+<p>Building a network takes time. Don't expect instant results. The goal isn't to know a hundred people by next month — it's to build a small number of genuine connections that grow over time.
+</p>
+<p>Start with one conversation this week. Attend one event this month. Send one LinkedIn connection request to someone whose work interests you. These small actions compound. Six months from now, you'll look back and realise you've built something that didn't exist before.
+</p>
+<p>You're not networking. You're building a community. And as an apprentice considering further study, you're exactly the kind of person that community needs.
+</p>
+    </div>
+
+    <div class="guide-nav">
+        <a href="career-without-phd.html" class="prev">
+            <span class="guide-nav-label">← Previous</span>
+            <span class="guide-nav-title">The Other Route — Advancing Without a Doctorate</span>
+        </a>
+        <a href="student-finance.html" class="next">
+            <span class="guide-nav-label">Next →</span>
+            <span class="guide-nav-title">Paying for It: Student Finance for Non-Standard Applicants</span>
+        </a>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <img src="../logo.png" alt="ARC logo" class="footer-logo-img">
+            <div class="footer-tagline">Not the Backup Plan.</div>
+            <div class="footer-links">
+                <a href="../">Home</a>
+                <a href="../guides.html">All Guides</a>
+                <a href="../#join">Get Involved</a>
+            </div>
+            <p>&copy; 2025 ARC — Apprentices into Research Careers</p>
+        </div>
+    </footer>
+</body>
+</html>

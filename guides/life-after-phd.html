@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Comes After? — ARC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+
+:root {
+    --amber: #E8913A;
+    --amber-light: #F4C27F;
+    --amber-glow: #FFF3E0;
+    --teal: #1A6B5A;
+    --teal-deep: #0E4D3F;
+    --teal-light: #E8F5F1;
+    --cream: #FFFBF5;
+    --cream-mid: #FFF7ED;
+    --charcoal: #2D2A26;
+    --warm-gray: #6B6560;
+    --warm-gray-light: #A39E98;
+    --coral: #E85D4A;
+    --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    color: var(--charcoal);
+    background: var(--cream);
+    line-height: 1.7;
+    font-weight: 400;
+    overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255, 251, 245, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 20px rgba(45, 42, 38, 0.06);
+    transition: all 0.3s;
+}
+
+.nav-logo {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none; color: var(--charcoal);
+}
+
+.nav-logo-img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+}
+
+.nav-links {
+    display: flex; gap: 1.8rem; list-style: none; align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none; color: var(--warm-gray);
+    font-size: 0.88rem; font-weight: 500; transition: color 0.3s;
+    letter-spacing: 0.02em;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--teal); }
+
+.nav-cta {
+    background: var(--teal) !important; color: white !important;
+    padding: 0.5rem 1.3rem; border-radius: 100px;
+    font-weight: 600 !important; transition: all 0.3s;
+}
+
+.nav-cta:hover {
+    background: var(--teal-deep) !important;
+    transform: translateY(-1px);
+}
+
+.mobile-toggle {
+    display: none; background: none; border: none; cursor: pointer; padding: 0.5rem;
+}
+.mobile-toggle span {
+    display: block; width: 22px; height: 2px; background: var(--charcoal);
+    margin: 5px 0; transition: all 0.3s; border-radius: 2px;
+}
+
+/* ===== GUIDE PAGE ===== */
+.guide-header {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.guide-header::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header::after {
+    content: '';
+    position: absolute; bottom: -30%; left: -15%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26, 107, 90, 0.05) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guide-header-inner {
+    max-width: 720px; margin: 0 auto; position: relative; z-index: 1;
+}
+
+.guide-breadcrumb {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.82rem; color: var(--warm-gray-light);
+    margin-bottom: 1.5rem; text-decoration: none;
+    transition: color 0.3s;
+}
+
+.guide-breadcrumb:hover { color: var(--teal); }
+
+.guide-breadcrumb svg { width: 14px; height: 14px; }
+
+.guide-number {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--teal-light); color: var(--teal);
+    padding: 0.35rem 1rem; border-radius: 100px;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+}
+
+.guide-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.15; color: var(--charcoal);
+    margin-bottom: 0.8rem; font-weight: 400;
+}
+
+.guide-subtitle {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto; line-height: 1.7;
+}
+
+/* ===== GUIDE CONTENT ===== */
+.guide-body {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 2rem 5rem;
+}
+
+.guide-body h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; color: var(--charcoal);
+    margin: 3rem 0 1rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--charcoal);
+    margin: 2rem 0 0.8rem; font-weight: 400;
+    line-height: 1.3;
+}
+
+.guide-body p {
+    color: var(--warm-gray);
+    font-size: 1.02rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.85;
+}
+
+.guide-body p:first-child {
+    font-size: 1.1rem;
+    color: var(--charcoal);
+}
+
+.guide-body strong {
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+.guide-body em {
+    font-style: italic;
+}
+
+.guide-body blockquote,
+.guide-body .callout {
+    margin: 2rem 0;
+    padding: 1.5rem 1.5rem 1.5rem 2rem;
+    border-left: 3px solid var(--amber);
+    background: var(--amber-glow);
+    border-radius: 0 12px 12px 0;
+    font-size: 0.98rem;
+    color: var(--charcoal);
+    line-height: 1.7;
+}
+
+.guide-body a {
+    color: var(--teal);
+    text-decoration: underline;
+    text-decoration-color: rgba(26, 107, 90, 0.3);
+    text-underline-offset: 3px;
+    transition: all 0.2s;
+}
+
+.guide-body a:hover {
+    text-decoration-color: var(--teal);
+}
+
+/* ===== GUIDE NAV (prev/next) ===== */
+.guide-nav {
+    max-width: 700px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+    display: flex; justify-content: space-between; gap: 1rem;
+    border-top: 1px solid rgba(45, 42, 38, 0.08);
+    padding-top: 2rem;
+}
+
+.guide-nav a {
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.08);
+    transition: all 0.3s;
+    max-width: 48%;
+    display: flex; flex-direction: column; gap: 0.3rem;
+}
+
+.guide-nav a:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(45, 42, 38, 0.06);
+}
+
+.guide-nav-label {
+    font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--warm-gray-light);
+    font-weight: 600;
+}
+
+.guide-nav-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem; color: var(--charcoal); line-height: 1.3;
+}
+
+.guide-nav a.next { text-align: right; margin-left: auto; }
+
+/* ===== GUIDES INDEX ===== */
+.guides-hero {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+}
+
+.guides-hero::before {
+    content: '';
+    position: absolute; top: -30%; right: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232, 145, 58, 0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+
+.guides-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: var(--charcoal); margin-bottom: 1rem;
+    font-weight: 400; position: relative; z-index: 1;
+}
+
+.guides-hero p {
+    font-size: 1.1rem; color: var(--warm-gray);
+    max-width: 600px; margin: 0 auto;
+    line-height: 1.7; position: relative; z-index: 1;
+}
+
+.guides-section {
+    max-width: 900px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+}
+
+.guides-category {
+    margin-bottom: 3rem;
+}
+
+.guides-category-label {
+    font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--amber); margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(45, 42, 38, 0.06);
+}
+
+.guide-card {
+    display: block; text-decoration: none;
+    padding: 1.3rem 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(45, 42, 38, 0.06);
+    margin-bottom: 0.75rem;
+    transition: all 0.3s;
+}
+
+.guide-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(45, 42, 38, 0.06);
+}
+
+.guide-card-num {
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--teal); margin-bottom: 0.25rem;
+}
+
+.guide-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--charcoal);
+    margin-bottom: 0.3rem; line-height: 1.3;
+}
+
+.guide-card-desc {
+    font-size: 0.88rem; color: var(--warm-gray); line-height: 1.5;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background: var(--teal-deep);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.site-footer a {
+    color: var(--amber-light);
+    text-decoration: none;
+}
+
+.site-footer a:hover { text-decoration: underline; }
+
+.footer-inner {
+    max-width: 600px; margin: 0 auto;
+}
+
+.footer-logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+    color: var(--amber-light);
+    font-size: 0.9rem; margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.footer-links {
+    display: flex; gap: 1.5rem; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-toggle { display: block; }
+    nav.open .nav-links {
+        display: flex; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(255, 251, 245, 0.98);
+        backdrop-filter: blur(12px);
+        padding: 1rem 2rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(45, 42, 38, 0.08);
+    }
+    .guide-nav { flex-direction: column; }
+    .guide-nav a { max-width: 100%; }
+    .guide-nav a.next { text-align: left; }
+}
+
+@media (max-width: 480px) {
+    .guide-header { padding: 7rem 1.2rem 2rem; }
+    .guide-body { padding: 1.5rem 1.2rem 4rem; }
+    .guide-body h2 { font-size: 1.4rem; }
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="nav-logo">
+            <img src="../logo.png" alt="ARC logo" class="nav-logo-img">
+            <span class="nav-logo-text">ARC</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../index.html" >Home</a></li>
+            <li><a href="../guides.html" class='active'>Guides</a></li>
+            <li><a href="../index.html#join" class="nav-cta">Get Involved</a></li>
+        </ul>
+        <button class="mobile-toggle" onclick="this.closest('nav').classList.toggle('open')" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="guide-header">
+        <div class="guide-header-inner">
+            <a href="../guides.html" class="guide-breadcrumb">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                All Guides
+            </a>
+            <div class="guide-number">Guide 13</div>
+            <h1>What Comes After?</h1>
+            <p class="guide-subtitle">A PhD opens more doors than you think. Here's an honest map of where it can take you.</p>
+        </div>
+    </div>
+
+    <div class="guide-body">
+        <h2>Why This Guide Exists</h2>
+<p>One of the biggest barriers to starting a PhD is not knowing what happens at the end. If you're going to commit three to four years and take a pay cut to get there, you need to see what's on the other side.
+</p>
+<p>The common assumption is that a PhD leads to an academic career — lecturing and running a research group. That's one option, and it's a good one for some people. But the reality is that the majority of PhD graduates now work outside academia. According to HESA data, only about one in five doctoral graduates in employment fifteen months after graduating are working in education or academic roles. The rest are spread across industry, healthcare, government, consulting, and dozens of other sectors.
+</p>
+<p>This guide maps out the landscape honestly, so you can make your decision with your eyes open.
+</p>
+<h2>Staying in Academic Research</h2>
+<p>The traditional path after a PhD is a postdoctoral research position — a fixed-term contract (usually one to three years) where you continue doing research, often in a different lab or on a different topic. Postdocs build your publication record, expand your expertise, and are the stepping stone to an independent academic position.
+</p>
+<p>The academic career ladder roughly looks like this: PhD → Postdoc (one or more) → Lecturer or Research Fellow → Senior Lecturer/Reader → Professor. At each stage, you're expected to demonstrate increasing independence: securing your own grants, building a research group, publishing high-quality work, and contributing to teaching and supervision.
+</p>
+<p>The honest reality: permanent academic positions are highly competitive. The number of PhD graduates far exceeds the number of available lectureships. This doesn't mean it's impossible — people do get these jobs, and if it's what you want, the path is clear. But it does mean you should treat academia as one option among many, not the only acceptable outcome. And you should know that a career in academic research outside the traditional tenure track is also possible — research-focused roles, core facility management, and research support positions are growing areas.
+</p>
+<h2>Industry Research and Development</h2>
+<p>If you enjoy research but want a different working environment, industry R&D is one of the most natural transitions. Pharmaceutical companies, biotechnology firms, medical device manufacturers, food and agriculture companies, and chemical engineering firms all employ scientists with doctoral-level expertise.
+</p>
+<p>In industry, you'll apply your research skills to product development, process improvement, or applied investigation. The work is often more structured than academic research — projects have timelines and commercial objectives — but the scientific rigour is the same. You may run your own experiments, manage small teams, and contribute to patent applications or regulatory submissions.
+</p>
+<p>Starting salaries in industry R&D are typically higher than academic postdoc salaries, and career progression is often clearer. The trade-off is that you have less freedom to choose your research questions — the work is driven by business needs rather than curiosity alone.
+</p>
+<p>For apprentices who go on to do PhDs, industry R&D can feel particularly natural. You already know what it's like to do science in a commercial or clinical environment. That experience, combined with doctoral-level expertise, makes you a strong candidate.
+</p>
+<h2>Science Communication and Publishing</h2>
+<p>If you love science but discover during your PhD that you enjoy writing about it or explaining it more than doing it at the bench, science communication is a growing field.
+</p>
+<p>This includes science journalism (writing for newspapers, magazines, and websites), working for research publishers or learned societies, creating content for science organisations, and public engagement roles at universities, charities, or government bodies.
+</p>
+<p>Many science communication roles value a PhD because it gives you the depth of understanding needed to engage with complex topics credibly. Your ability to read primary literature, assess evidence critically, and translate jargon into plain language is the core skill.
+</p>
+<p>Entry routes include the AAAS Mass Media Fellowship equivalents, science writing internships, and increasingly, building a portfolio through blogging, social media, or freelance work during your PhD. Jobs are listed on jobs.ac.uk, the Association of British Science Writers, and general media job boards.
+</p>
+<h2>Science Policy and Government</h2>
+<p>Science policy is for people who want to influence how science is funded, regulated, and used in society. It sits at the intersection of scientific knowledge and political decision-making.
+</p>
+<p>Roles exist in government (the Government Office for Science, research councils, UKRI, the Environment Agency, Public Health agencies), in Parliament (the Parliamentary Office of Science and Technology runs a paid fellowship scheme specifically for PhD graduates), in think tanks (the Nuffield Foundation, the Royal Society, the Wellcome Trust), and in learned societies.
+</p>
+<p>Policy work involves synthesising evidence, writing briefings, advising decision-makers, and connecting the research community with the people who allocate funding and set regulations. The pace and culture are very different from the lab — you'll work across topics rather than deep in one, and the impact is measured in policy change rather than publications.
+</p>
+<h2>Clinical Research and Regulatory Affairs</h2>
+<p>If your PhD is in a biomedical or health-related field, the clinical research sector offers substantial career opportunities. Clinical research associates manage and monitor clinical trials. Medical science liaisons act as a bridge between pharmaceutical companies and healthcare professionals. Regulatory affairs specialists navigate the complex approval processes for new drugs, devices, and therapies.
+</p>
+<p>These roles combine scientific understanding with project management, communication, and attention to regulatory frameworks. They're well-paid and in consistent demand, particularly in the UK's pharmaceutical and biotech sector.
+</p>
+<h2>Data Science, Consulting, and Beyond</h2>
+<p>The transferable skills from a PhD — analytical thinking, project management, data analysis, statistical reasoning, clear communication — are valued in sectors that may seem far removed from the lab.
+</p>
+<p>Management consulting firms actively recruit PhD graduates for their ability to tackle complex, ambiguous problems. Data science roles in finance, technology, healthcare, and government draw on statistical and computational skills developed during doctoral research. Patent law and intellectual property work combines scientific expertise with legal frameworks. Teaching — whether at secondary, further education, or higher education level — allows you to share your knowledge directly.
+</p>
+<p>The point is not that any of these is "better" than academic research. The point is that a PhD doesn't narrow your options. It expands them. And knowing this before you start can actually make you a better PhD student, because you can actively build the skills and connections that will serve your chosen direction.
+</p>
+<h2>How to Prepare During Your PhD</h2>
+<p>You don't have to wait until year three to think about careers. Small investments of time throughout your PhD can make a big difference:
+</p>
+<p>Use your university's careers service — many now have dedicated support for researchers. Attend seminars and events from visiting speakers in different sectors. Take advantage of transferable skills training offered by your DTP or graduate school. Do a short placement or secondment if your programme allows it — even a week in a different environment can be eye-opening. Build a professional presence on LinkedIn, attend industry events, and talk to PhD alumni who've gone into different fields.
+</p>
+<p>And remember: you don't have to decide now. A PhD gives you time to explore. Use it.
+</p>
+    </div>
+
+    <div class="guide-nav">
+        <a href="phd-interview.html" class="prev">
+            <span class="guide-nav-label">← Previous</span>
+            <span class="guide-nav-title">The PhD Interview</span>
+        </a>
+        <a href="career-without-phd.html" class="next">
+            <span class="guide-nav-label">Next →</span>
+            <span class="guide-nav-title">The Other Route — Advancing Without a Doctorate</span>
+        </a>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <img src="../logo.png" alt="ARC logo" class="footer-logo-img">
+            <div class="footer-tagline">Not the Backup Plan.</div>
+            <div class="footer-links">
+                <a href="../">Home</a>
+                <a href="../guides.html">All Guides</a>
+                <a href="../#join">Get Involved</a>
+            </div>
+            <p>&copy; 2025 ARC — Apprentices into Research Careers</p>
+        </div>
+    </footer>
+</body>
+</html>
